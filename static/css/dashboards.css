@@ -1,0 +1,38 @@
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20vw;
+    height: 100vh;
+    border: 1px solid black;
+}
+
+.sidebar .logo{
+    height: 10vh;
+    font-family: 'poppins';
+    font-weight: bold;
+    font-size: 2em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid black;
+}
+
+.sidebar .nav ul li{
+    border: 1px solid black;
+}
+
+.sidebar .nav li .icon{
+
+}
+
+.sidebar .nav li .text{
+    
+}
+
+.social-icons{
+
+}
+
+.social-icons i{
+    
+}
