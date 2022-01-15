@@ -1,19 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>suyash</title>
+    <title>Suyash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Montserrat&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
+
 <body>
-    your turn suyash
+    <header>
+        <nav>
+            <div class="logo">Logo</div>
+            <div class="navbar">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Sign up</a></li>
+                    <li><a href="#">Log In</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="text">
+                <div class="title">This is title</div>
+                <div class="desc">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium cupiditate, quidem ipsa commodi
+                    dignissimos aliquid distinctio eum nulla neque laborum. Hic possimus deleniti error quo assumenda
+                    dolores nemo architecto non?
+                </div>
+                <button class="btn">Get started!</button>
+            </div>
+        </div>
+    </header>
+    <!-- your turn suyash
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
     {{message}}
     {% endfor %}
     {% endif %}
-    {% endwith %}
+    {% endwith %} -->
 </body>
+<script>
+    var container = document.querySelector('body');
+    window.onmousemove = function(e){
+        var x = - e.clientX/5,
+            y = - e.clientY/5;
+        container.style.backgroundPositionX = x + 'px';
+        container.style.backgroundPositionY = y + 'px';
+    }
+</script>
 </html>
