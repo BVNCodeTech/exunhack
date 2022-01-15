@@ -1,7 +1,8 @@
+from re import A
 from flask import Flask, flash, request, session
 from flask.templating import render_template
 from werkzeug.utils import redirect
-from functions.users import check_for_user
+from functions.users import check_for_user, register
 
 app = Flask(__name__)
 app.secret_key = 'HELIKOPTER HELIKOPTER'
@@ -51,6 +52,31 @@ def logout():
         session['login'] = False
     flash('successfully logged out')    
     return redirect('/')
+
+@app.route('/signup')
+def signup():
+    if session['login']:
+        return redirect('/dashboard')
+    else:
+        return render_template('signup.html')
+
+@app.route('/signup/submit', methods=['GET', 'POST'])
+def registerUser():
+    if session['login']:
+        flash("you are already logged in, you can't make an account")
+        return redirect('/')
+    else:
+        data = request.form
+        name = data['name']
+        email = data['email']
+        password = data['password']
+        status = register(name, email, password)
+    if status:
+        flash('Registration Successful!')
+        return redirect('/')
+    else:
+        flash('an error occured, please try again')
+        return redirect('/signup')
 
 if __name__ == '__main__':
     app.run(debug=True)
