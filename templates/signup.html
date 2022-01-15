@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
+
 <body>
-    <form action="/signup/submit" method="post">
-        <input type="name" name="name" id="name" placeholder="name" required>
-        <input type="email" name="email" id="email" placeholder="Email" required>
-        <input type="password" name="password" id="password" placeholder="Password" required>
-        <input type="submit">
-    </form>
+    <div class="container">
+        <h1>Login</h1>
+        <form action="/signup/submit" method="post">
+            <div class="txt_field">
+                <input type="name" name="name" id="name" required>
+                <span></span>
+                <label>Name</label>
+            </div>
+            <div class="txt_field">
+                <input type="email" name="email" id="email" required>
+                <span></span>
+                <label>Email</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" name="password" id="password" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <div class="pass">Forgot Password?</div>
+            <input type="submit">
+            <div class="signup_link">
+                Not a member? <a href="#">Signup</a>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>
