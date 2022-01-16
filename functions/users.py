@@ -3,10 +3,10 @@ from pymongo import MongoClient
 import bcrypt
 import urllib
 
-host = 'mongodb+srv://admin:' + urllib.parse.quote("CT@exun2022") + '@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 client = MongoClient(host)
 database = client['hackathon']
-user_collection = database['user_collection']
+user_collection = database['users']
 
 def register(name, email, password):
     data = {
