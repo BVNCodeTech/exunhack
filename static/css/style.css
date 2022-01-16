@@ -1,23 +1,8 @@
-/* font-family: 'Libre Baskerville', serif;
-font-family: 'Montserrat', sans-serif; */
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-:root{
-    --purple: #8147fd;;
-    --green: #04cfbb;
-}
-
-li{list-style-type: none;}
-a{text-decoration: none;}
 body{
     height: 100vh;
     background-color: #121212;
     color: white;
-    background-image: url('../images/p404.png');
+    background-image: url('../images/bg.png');
 }
 
 header{

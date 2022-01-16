@@ -1,0 +1,112 @@
+:root{
+    --dark-dark: hsl(220deg 19% 6%);
+    --dark: hsl(225deg 17% 9%);
+}
+.main{background: var(--dark);
+height: 100vh;}
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20vw;
+    height: 100vh;
+    background: var(--dark-dark);
+    color: white;
+}
+
+.sidebar .logo{
+    height: 10vh;
+    font-family: 'poppins';
+    font-weight: bold;
+    font-size: 2em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 3vh;
+    border-bottom: 5px solid var(--purple);
+}
+
+.sidebar .nav{
+    padding: 69px 0;
+}
+.sidebar .nav ul li a{
+    padding: 10px 40px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .nav li .icon i{
+    color: white;
+    margin-right: 25px;
+}
+
+.sidebar .nav li .text{
+    color: white;
+    font-family: 'poppins';
+    font-size: 1.2em;
+}
+
+.social-icons ul{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 2em;
+    display: flex;
+}
+
+.social-icons i{
+    color: white;
+    margin: 10px;
+}
+
+header{
+    width: 80%;
+    margin-left: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 3%;
+    height: 10vh;
+}
+
+header .left{
+    display: flex;
+    align-items: center;
+}
+
+header .left .hamburger{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2em;
+}
+
+.ham-line{
+    border: 1px solid white;
+    width: 40px;
+    margin: 6px 0;
+}
+
+header .left .dashboard{
+    text-transform: uppercase;
+    font-family: 'Poppins', serif;
+    font-weight: bold;
+    color: white;
+}
+
+header .right{
+    display: flex;
+    align-items: center;
+}
+
+header .right .pfp img{
+    width: 50px;
+    height: 50px;
+    margin: 0 1em;
+}
+header .right .name{
+    font-family: 'poppins';
+    color: white;
+}
