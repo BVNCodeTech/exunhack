@@ -1,3 +1,4 @@
+import email
 from pymongo import MongoClient
 import urllib
 
@@ -7,8 +8,8 @@ database = client['hackathon']
 user_collection = database['users']
 task_collection = database['tasks']
 
-def add_task(name, description, deadline, points):
-    task_collection.insert_one({'name':name, 'description':description, 'points':int(points), 'deadline':deadline})
+def add_task(email, name, description, deadline, points):
+    task_collection.insert_one({'email':email, 'name':name, 'description':description, 'points':int(points), 'deadline':deadline})
     return 'New task added'
 
 def remove_task(id):
@@ -21,12 +22,15 @@ def edit_task(id, name, description, deadline, points):
     task_collection.update_one(query, updated)
     return 'Task updated'
 
-def get_all_tasks():
+def get_all_tasks(email):
     tasks = {}
     count = 0
-    for task in task_collection.find():
-        count+=1
-        tasks[count] = task
+    try:
+        for task in task_collection.find({"email":email}):
+            count+=1
+            tasks[count] = task
+    except:
+        return "you have no tasksskskskskks"
     return tasks
 
 def get_task(id):

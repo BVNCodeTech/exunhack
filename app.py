@@ -39,6 +39,7 @@ def submitlogin():
         check = check_for_user(email, password)     # function returns True if user and pass are correct, false if user and email don't match, returns an error otherwise
         if check:
             session['login'] = True
+            session['email'] = email
             flash('Succesfully Logged in!')
             return redirect('/')
         elif not check:
@@ -88,14 +89,24 @@ def registerUser():
         return redirect('/signup')
 
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+
 @app.route('/tasks')
 def all_tasks():
-    return str(get_all_tasks())
-
+    if session['login']:
+        tasks = dict(get_all_tasks(session['email']))
+        tasklist = []
+        return tasklist.append(tasks[task]["description"] for task in tasks)
+    else:
+        flash('you deadass have not signed in you disgusting oompa loompa')
+        return redirect('/login')
 
 @app.route('/tasks/<id>')
 def get_one_task(id):
-    object_id = get_all_tasks()[int(id)]['_id']
+    object_id = get_all_tasks(session['email'])[int(id)]['_id']
     return str(get_task(object_id))
 
 
@@ -108,7 +119,7 @@ def new_task():
 def new_task_submit():
     if request.method == 'POST':
         data = request.form
-        flash(add_task(data.get('name'), data.get('description'), data.get('deadline'), int(data.get('points'))))
+        flash(add_task(data.get('email'), data.get('name'), data.get('description'), data.get('deadline'), int(data.get('points'))))
         return redirect('/tasks')
     else:
         return redirect('/tasks/add')
