@@ -12,7 +12,10 @@ def register(name, email, password):
     data = {
         '_id': email.lower(),
         'password': bcrypt.hashpw(password.encode(), bcrypt.gensalt()),
-        'name': name
+        'name': name,
+        'role':'worker',
+        'level':0,
+        'points':0
     }
     if '@' in email:
         try:
@@ -25,5 +28,13 @@ def check_for_user(email, password):
     user = user_collection.find_one({'_id': email.lower()})
     if user:
         return bcrypt.checkpw(password.encode(), user['password'])
+    else:
+        return False
+
+
+def check_admin(user):
+    user = user_collection.find_one({'_id':user})
+    if user['role'].lower() == 'admin':
+        return True
     else:
         return False
