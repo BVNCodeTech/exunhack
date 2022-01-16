@@ -24,7 +24,7 @@ def home():
 
 @app.route('/login')
 def loginpage():
-    if session['login']:
+    if session['login'] and session['user']:
         return redirect('/dashboard')
     else:
         return render_template('loginpage.html')
@@ -39,6 +39,7 @@ def submitlogin():
         check = check_for_user(email, password)     # function returns True if user and pass are correct, false if user and email don't match, returns an error otherwise
         if check:
             session['login'] = True
+            session['user'] = email
             flash('Succesfully Logged in!')
             return redirect('/')
         elif not check:
@@ -55,13 +56,14 @@ def submitlogin():
 def logout():
     if session['login']:
         session['login'] = False
+        session['user'] = None
     flash('successfully logged out')    
-    return redirect('/')
+    return redirect('/login')
 
 
 @app.route('/signup')
 def signup():
-    if session['login']:
+    if session['login'] and session['user']:
         return redirect('/dashboard')
     else:
         return render_template('signup.html')
@@ -90,52 +92,95 @@ def registerUser():
 
 @app.route('/tasks')
 def all_tasks():
-    return str(get_all_tasks())
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            return str(get_all_tasks())
+        else:
+            return 'User assigned tasks'
+    else:
+        return redirect('/login')
 
 
 @app.route('/tasks/<id>')
 def get_one_task(id):
-    object_id = get_all_tasks()[int(id)]['_id']
-    return str(get_task(object_id))
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            object_id = get_all_tasks()[int(id)]['_id']
+            return str(get_task(object_id))
+        else:
+            return 'Unauthorized'
+    else:
+        return redirect('/login')
 
 
 @app.route('/tasks/add')
 def new_task():
-    return render_template('add_task.html', edit = False)
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            return render_template('add_task.html', edit = False)
+        else:
+                return 'Unauthorized'
+    else:
+        return redirect('/login')
 
 
 @app.route('/tasks/add/submit', methods = ['GET', 'POST'])
 def new_task_submit():
-    if request.method == 'POST':
-        data = request.form
-        flash(add_task(data.get('name'), data.get('description'), data.get('deadline'), int(data.get('points'))))
-        return redirect('/tasks')
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            if request.method == 'POST':
+                data = request.form
+                flash(add_task(data.get('name'), data.get('description'), data.get('deadline'), int(data.get('points'))))
+                return redirect('/tasks')
+            else:
+                return redirect('/tasks/add')
+        else:
+            return 'Unauthorized'
     else:
-        return redirect('/tasks/add')
+        return redirect('/login')
 
 
 @app.route('/tasks/remove/<id>', methods=['GET','POST'])
 def del_task(id):
-    object_id = get_all_tasks()[int(id)]['_id']
-    flash(remove_task(object_id))
-    return redirect('/tasks')
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            object_id = get_all_tasks()[int(id)]['_id']
+            flash(remove_task(object_id))
+            return redirect('/tasks')
+        else:
+            return 'Unauthorized'
+    else:
+        return redirect('/login')
 
 
 @app.route('/tasks/edit/<id>')
 def edit_exis_task(id):
-    task = get_all_tasks()[int(id)]
-    return render_template('add_task.html', edit=True, data=task, id=str(id))
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            task = get_all_tasks()[int(id)]
+            return render_template('add_task.html', edit=True, data=task, id=str(id))
+        else:
+            return 'Unauthorized'
+    else:
+        return redirect('/login')
 
 
 @app.route('/tasks/edit/<id>/submit', methods=['GET','POST'])
 def edit_task_submit(id):
-    if request.method == 'POST':
-        data = request.form
-        object_id = get_all_tasks()[int(id)]['_id']
-        flash(edit_task(object_id, data.get('name'), data.get('description'), data.get('deadline'), int(data.get('points'))))
-        return redirect('/tasks')
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            if request.method == 'POST':
+                data = request.form
+                object_id = get_all_tasks()[int(id)]['_id']
+                flash(edit_task(object_id, data.get('name'), data.get('description'), data.get('deadline'), int(data.get('points'))))
+                return redirect('/tasks')
+            else:
+                return redirect('/tasks/edit/<id>')
+        else:
+            return 'Unauthorized'
     else:
-        return redirect('/tasks/edit/<id>')
+        return redirect('/login')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
