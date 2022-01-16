@@ -54,42 +54,24 @@
                     <div class="pfp">
                         <img src="../static/images/user.png" alt="">
                     </div>
-                    <div class="name">John Doe</div>
+                    <div class="name">{{email}}</div>
                 </div>
             </header>
 
             <main>
                 <div class="title">Tasks</div>
+                {% for task in tasks %}
                 <div class="task">
                     <div class="text">
-                        <div class="name">Task 1</div>
-                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat corporis dolores at eve</div>    
+                        <div class="name">Task {{tasks.index(task)}}</div>
+                        <div class="desc">{{task}}</div>    
                     </div>
                     <div class="progress-indicator">
                         <div class="number">60%</div>
                         <div class="progress-bar"></div>
                     </div>
                 </div>
-                <div class="task">
-                    <div class="text">
-                        <div class="name">Task 1</div>
-                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat corporis dolores at eve</div>    
-                    </div>
-                    <div class="progress-indicator">
-                        <div class="number">60%</div>
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
-                <div class="task">
-                    <div class="text">
-                        <div class="name">Task 1</div>
-                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat corporis dolores at eve</div>    
-                    </div>
-                    <div class="progress-indicator">
-                        <div class="number">60%</div>
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
+                {% endfor %}
             </main>
         </div>
 

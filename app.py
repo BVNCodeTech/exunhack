@@ -24,7 +24,7 @@ def home():
 
 @app.route('/login')
 def loginpage():
-    if session['login'] and session['user']:
+    if session['login'] and session['email']:
         return redirect('/dashboard')
     else:
         return render_template('loginpage.html')
@@ -39,6 +39,7 @@ def submitlogin():
         check = check_for_user(email, password)     # function returns True if user and pass are correct, false if user and email don't match, returns an error otherwise
         if check:
             session['login'] = True
+            session['email'] = email
             session['email'] = email
             flash('Succesfully Logged in!')
             return redirect('/')
@@ -56,14 +57,14 @@ def submitlogin():
 def logout():
     if session['login']:
         session['login'] = False
-        session['user'] = None
+        session['email'] = None
     flash('successfully logged out')    
     return redirect('/login')
 
 
 @app.route('/signup')
 def signup():
-    if session['login'] and session['user']:
+    if session['login'] and session['email']:
         return redirect('/dashboard')
     else:
         return render_template('signup.html')
@@ -100,7 +101,9 @@ def all_tasks():
     if session['login']:
         tasks = dict(get_all_tasks(session['email']))
         tasklist = []
-        return tasklist.append(tasks[task]["description"] for task in tasks)
+        for task in tasks:
+            tasklist.append(tasks[task]["description"])
+        return render_template('tasks.html', tasks= tasklist, email=session["email"])
     else:
         flash('you deadass have not signed in you disgusting oompa loompa')
         return redirect('/login')
@@ -113,19 +116,19 @@ def get_one_task(id):
 
 @app.route('/tasks/add')
 def new_task():
-    if session['login'] and session['user']:
-        if check_admin(session['user']):
+    if session['login'] and session['email']:
+        if check_admin(session['email']):
             return render_template('add_task.html', edit = False)
         else:
-                return 'Unauthorized'
+            return 'Unauthorized'
     else:
-        return redirect('/login')
+        return redirect('/tasks')
 
 
 @app.route('/tasks/add/submit', methods = ['GET', 'POST'])
 def new_task_submit():
-    if session['login'] and session['user']:
-        if check_admin(session['user']):
+    if session['login'] and session['email']:
+        if check_admin(session['email']):
             if request.method == 'POST':
                 data = request.form
                 flash(add_task(data.get('name'), data.get('description'), data.get('deadline'), int(data.get('points'))))
@@ -137,11 +140,11 @@ def new_task_submit():
     else:
         return redirect('/login')
 
-
+#--------- THESE FUNCTIONS ARE REDUNDANT FOR NOW ----------------
 @app.route('/tasks/remove/<id>', methods=['GET','POST'])
 def del_task(id):
-    if session['login'] and session['user']:
-        if check_admin(session['user']):
+    if session['login'] and session['email']:
+        if check_admin(session['email']):
             object_id = get_all_tasks()[int(id)]['_id']
             flash(remove_task(object_id))
             return redirect('/tasks')
@@ -153,8 +156,8 @@ def del_task(id):
 
 @app.route('/tasks/edit/<id>')
 def edit_exis_task(id):
-    if session['login'] and session['user']:
-        if check_admin(session['user']):
+    if session['login'] and session['email']:
+        if check_admin(session['email']):
             task = get_all_tasks()[int(id)]
             return render_template('add_task.html', edit=True, data=task, id=str(id))
         else:
@@ -165,8 +168,8 @@ def edit_exis_task(id):
 
 @app.route('/tasks/edit/<id>/submit', methods=['GET','POST'])
 def edit_task_submit(id):
-    if session['login'] and session['user']:
-        if check_admin(session['user']):
+    if session['login'] and session['email']:
+        if check_admin(session['email']):
             if request.method == 'POST':
                 data = request.form
                 object_id = get_all_tasks()[int(id)]['_id']
@@ -178,7 +181,7 @@ def edit_task_submit(id):
             return 'Unauthorized'
     else:
         return redirect('/login')
-
+#-----------------------------------------------------------
 
 if __name__ == '__main__':
     app.run(debug=True)
