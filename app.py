@@ -8,7 +8,6 @@ from functions.tasks import *
 app = Flask(__name__)
 app.secret_key = 'HELIKOPTER HELIKOPTER'
 
-
 @app.route('/')
 def home():
     try:
@@ -21,7 +20,6 @@ def home():
         login = session['login']
     return render_template('index.html', login=login)
 
-
 @app.route('/login')
 def loginpage():
     if session['login'] and session['email']:
@@ -29,14 +27,13 @@ def loginpage():
     else:
         return render_template('loginpage.html')
 
-
 @app.route('/login/submit', methods=['GET', 'POST'])
 def submitlogin():
     if request.method == 'POST':
         data = request.form
         email = data['email']
         password = data['password']
-        check = check_for_user(email, password)     # function returns True if user and pass are correct, false if user and email don't match, returns an error otherwise
+        check = check_for_user(email, password) 
         if check:
             session['login'] = True
             session['email'] = email
@@ -52,7 +49,6 @@ def submitlogin():
     else:    
         return redirect('/login')
 
-
 @app.route('/logout')
 def logout():
     if session['login']:
@@ -61,14 +57,12 @@ def logout():
     flash('successfully logged out')    
     return redirect('/login')
 
-
 @app.route('/signup')
 def signup():
     if session['login'] and session['email']:
         return redirect('/dashboard')
     else:
         return render_template('signup.html')
-
 
 @app.route('/signup/submit', methods=['GET', 'POST'])
 def registerUser():
@@ -90,11 +84,9 @@ def registerUser():
     else:
         return redirect('/signup')
 
-
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html')
-
 
 @app.route('/tasks')
 def all_tasks():
@@ -112,7 +104,6 @@ def all_tasks():
 def get_one_task(id):
     object_id = get_all_tasks(session['email'])[int(id)]['_id']
     return str(get_task(object_id))
-
 
 @app.route('/tasks/add')
 def new_task():
