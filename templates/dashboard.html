@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,18 +11,23 @@
     <link rel="stylesheet" href="../static/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Montserrat&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="main">
         <div class="sidebar">
             <div class="logo">Logo</div>
             <div class="nav">
                 <ul>
-                    <li><a href=""><span class="icon"><i class="fas fa-hourglass-half"></i></span><span class="text">Dashboard</span></a></li>
-                    <li><a href=""><span class="icon"><i class="fas fa-signal"></i></span><span class="text">Stats</span></a></li>
-                    <li><a href=""><span class="icon"><i class="fas fa-coins"></i></span><span class="text">Rewards</span></a></li>
-                    <li><a href=""><span class="icon"><i class="fas fa-info"></i></span><span class="text">Info</span></a></li>
+                    <li><a href=""><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
+                                class="text">Dashboard</span></a></li>
+                    <li><a href=""><span class="icon"><i class="fas fa-signal"></i></span><span
+                                class="text">Stats</span></a></li>
+                    <li><a href=""><span class="icon"><i class="fas fa-coins"></i></span><span
+                                class="text">Rewards</span></a></li>
+                    <li><a href=""><span class="icon"><i class="fas fa-info"></i></span><span
+                                class="text">Info</span></a></li>
                 </ul>
             </div>
         </div>
@@ -34,22 +40,57 @@
             </ul>
         </div>
 
-        <header>
-            <div class="left">
-                <div class="hamburger">
-                    <div class="ham-line"></div>
-                    <div class="ham-line"></div>
-                    <div class="ham-line"></div>
+        <div class="main-content">
+            <header>
+                <div class="left">
+                    <div class="hamburger">
+                        <div class="ham-line"></div>
+                        <div class="ham-line"></div>
+                        <div class="ham-line"></div>
+                    </div>
+                    <div class="dashboard">Dashboard</div>
                 </div>
-                <div class="dashboard">Dashboard</div>
-            </div>
-            <div class="right">
-                <div class="pfp">
-                    <img src="../static/images/user.png" alt="">
+                <div class="right">
+                    <div class="pfp">
+                        <img src="../static/images/user.png" alt="">
+                    </div>
+                    <div class="name">John Doe</div>
                 </div>
-                <div class="name">John Doe</div>
-            </div>
-        </header>
+            </header>
+            <main>
+                <div class="welcome">
+                    <div class="title">Welcome John Doe!</div>
+                    <div class="desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio numquam neque
+                        saepe doloribus odit vel, ipsum ?</div>
+                </div>
+                <div class="level">
+                    <div class="left">
+                        <div class="title">Level 1</div>
+                        <div class="level-points">980/1000</div>
+                    </div>
+                    <div class="right">
+
+                        <div class="outer">
+                            <div class="inner">
+                                <div class="number">80%</div>
+                            </div>
+                        </div>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                            <defs>
+                                <linearGradient id="GradientColor">
+                                    <stop offset="0%" stop-color="#e91e63" />
+                                    <stop offset="100%" stop-color="#673ab7" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                </div>
+            </main>
+        </div>
+
     </div>
 </body>
+
 </html>
