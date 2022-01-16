@@ -93,9 +93,15 @@ def all_tasks():
     return str(get_all_tasks())
 
 
+@app.route('/tasks/<id>')
+def get_one_task(id):
+    object_id = get_all_tasks()[int(id)]['_id']
+    return str(get_task(object_id))
+
+
 @app.route('/tasks/add')
 def new_task():
-    return render_template('add_task.html')
+    return render_template('add_task.html', edit = False)
 
 
 @app.route('/tasks/add/submit', methods = ['GET', 'POST'])
@@ -107,6 +113,29 @@ def new_task_submit():
     else:
         return redirect('/tasks/add')
 
+
+@app.route('/tasks/remove/<id>', methods=['GET','POST'])
+def del_task(id):
+    object_id = get_all_tasks()[int(id)]['_id']
+    flash(remove_task(object_id))
+    return redirect('/tasks')
+
+
+@app.route('/tasks/edit/<id>')
+def edit_exis_task(id):
+    task = get_all_tasks()[int(id)]
+    return render_template('add_task.html', edit=True, data=task, id=str(id))
+
+
+@app.route('/tasks/edit/<id>/submit', methods=['GET','POST'])
+def edit_task_submit(id):
+    if request.method == 'POST':
+        data = request.form
+        object_id = get_all_tasks()[int(id)]['_id']
+        flash(edit_task(object_id, data.get('name'), data.get('description'), data.get('deadline'), int(data.get('points'))))
+        return redirect('/tasks')
+    else:
+        return redirect('/tasks/edit/<id>')
 
 if __name__ == '__main__':
     app.run(debug=True)

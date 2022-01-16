@@ -17,7 +17,7 @@ def remove_task(id):
 
 def edit_task(id, name, description, deadline, points):
     query = {'_id':id}
-    updated = {'name':name, 'description':description, 'points':int(points), 'deadline':deadline}
+    updated = {'$set':{'name':name, 'description':description, 'points':int(points), 'deadline':deadline}}  
     task_collection.update_one(query, updated)
     return 'Task updated'
 
