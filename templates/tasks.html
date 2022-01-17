@@ -43,12 +43,12 @@
         </div>
 
         <div class="main-content">
+            <div class="overlay"></div>
             <header>
                 <div class="left">
                     <label for="nav-toggle">
                         <i class="fas fa-bars"></i>
                     </label>
-                    <div class="dashboard">Dashboard</div>
                 </div>
                 <div class="right">
                     <div class="pfp">
@@ -63,37 +63,92 @@
                 <div class="task">
                     <div class="text">
                         <div class="name">Task 1</div>
-                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat corporis dolores at eve</div>    
+                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat
+                            corporis dolores at eve</div>
                     </div>
-                    <div class="progress-indicator">
-                        <div class="number">60%</div>
-                        <div class="progress-bar"></div>
+                    <div class="employees">
+                        <div class="dropdown">
+                            <div class="default">
+                                <div>John</div>
+                                <i class="fas fa-caret-down"></i>
+                            </div>
+                            <ul>
+                                <li>John</li>
+                                <li>Doe</li>
+                                <li>Pancham</li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+                <div class="progress-indicator">
+                    <div class="progress-bar"></div>
+                    <div class="number">60%</div>
                 </div>
                 <div class="task">
                     <div class="text">
-                        <div class="name">Task 1</div>
-                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat corporis dolores at eve</div>    
+                        <div class="name">Task 2</div>
+                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat
+                            corporis dolores at eve</div>
                     </div>
-                    <div class="progress-indicator">
-                        <div class="number">60%</div>
-                        <div class="progress-bar"></div>
+                    <div class="employees">
+                        <div class="dropdown">
+                            <div class="default">
+                                <div>John</div>
+                                <i class="fas fa-caret-down"></i>
+                            </div>
+                            <ul>
+                                <li>John</li>
+                                <li>Doe</li>
+                                <li>Pancham</li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+                <div class="progress-indicator">
+                    <div class="progress-bar"></div>
+                    <div class="number">60%</div>
                 </div>
                 <div class="task">
                     <div class="text">
-                        <div class="name">Task 1</div>
-                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat corporis dolores at eve</div>    
+                        <div class="name">Task 3</div>
+                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat
+                            corporis dolores at eve</div>
                     </div>
-                    <div class="progress-indicator">
-                        <div class="number">60%</div>
-                        <div class="progress-bar"></div>
+                    <div class="employees">
+                        <div class="dropdown">
+                            <div class="default">
+                                <div>John</div>
+                                <i class="fas fa-caret-down"></i>
+                            </div>
+                            <ul>
+                                <li>John</li>
+                                <li>Doe</li>
+                                <li>Pancham</li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+                <div class="progress-indicator">
+                    <div class="progress-bar"></div>
+                    <div class="number">60%</div>
                 </div>
             </main>
         </div>
 
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script>
+    $(".default").click(function () {
+        $(this).siblings(".dropdown ul").toggleClass("active");
+    });
+
+    $(".dropdown ul li").click(function () {
+        var text = $(this).text();
+        $(".default div").text(text);
+        $(".dropdown ul").removeClass("active");
+    });
+</script>
 
 </html>
