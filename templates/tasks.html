@@ -54,12 +54,13 @@
                     <div class="pfp">
                         <img src="../static/images/user.png" alt="">
                     </div>
-                    <div class="name">John Doe</div>
+                    <div class="name">{{email}}</div>
                 </div>
             </header>
 
             <main>
                 <div class="title">Tasks</div>
+                {% for task in tasks %}
                 <div class="task">
                     <div class="text">
                         <div class="name">Task 1</div>

@@ -4,6 +4,8 @@
     --offset: calc(472 - (80/100)*472);
 }
 
+body{overflow-x: hidden;}
+
 .sidebar{
     position: fixed;
     top: 0;
@@ -72,14 +74,6 @@
 .social-icons i:hover{
     color: grey;
 }
-.main-content{
-    background: var(--dark);
-    width: 80%;
-    margin-left: 20%;
-    color: white;
-    height: 100vh;
-    transition: all 500ms ease;
-}
 
 header{
     display: flex;
@@ -87,6 +81,9 @@ header{
     align-items: center;
     padding: 10px 3%;
     height: 10vh;
+    position: relative;
+    z-index: 2;
+    background: var(--dark);
 }
 
 header .left{
@@ -94,27 +91,8 @@ header .left{
     align-items: center;
 }
 
-header .left .hamburger{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 2em;
-}
-
-.ham-line{
-    border: 1px solid white;
-    width: 40px;
-    margin: 6px 0;
-}
-
-header .left .dashboard{
-    text-transform: uppercase;
-    font-family: 'Poppins', serif;
-    font-weight: bold;
-    color: white;
-    margin-left: 1em;
+.main-content .left i{
+    font-size: 2em;
 }
 
 header .right{
@@ -134,6 +112,8 @@ header .right .name{
 
 .main-content main{
     padding: 5% 0;
+    position: relative;
+    z-index: 2;
 }
 .main-content main .welcome{
     margin: 3em auto;
