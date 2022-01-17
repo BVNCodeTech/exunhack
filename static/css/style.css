@@ -37,12 +37,12 @@ nav .navbar ul{
 
 nav .navbar li a{
     position: relative;
-    color: grey;
     font-family: 'Poppins';
     margin: 0 2em ;
     padding-bottom: 5px;
     border-bottom: 4px solid var(--purple);
     transition: 300ms ease-out;
+    color: white;
 }
 
 nav .navbar li a:before{
@@ -57,7 +57,7 @@ nav .navbar li a:before{
 }
 
 nav .navbar li a:hover{
-    color: white;
+    color: var(--purple);
 }
 
 nav .navbar li a:hover::before{
@@ -73,7 +73,9 @@ nav .navbar li a:hover::before{
 }
 
 .text{
-    width: 800px;
+    max-width: 800px;
+    text-align: center;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -111,4 +113,13 @@ nav .navbar li a:hover::before{
     background-color: var(--green);
     border: none;
     color: black;
+}
+
+@media all and (max-width: 740px){
+    nav{padding: 0 25px;}
+}
+
+@media all and (max-width: 500px){
+    nav .navbar li a{margin: 0 10px;}
+    .text{font-size: 80%;}
 }
