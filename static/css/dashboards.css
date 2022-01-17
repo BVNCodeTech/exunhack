@@ -61,6 +61,7 @@ body{overflow-x: hidden;}
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 5;
     margin: 2em;
     display: flex;
     transition: all 500ms ease;
@@ -239,10 +240,48 @@ circle{
 }
 
 #nav-toggle:checked ~ .main-content{
-    margin-left: 3%;
-    width: 97vw;
+    margin-left: 4%;
+    width: 96vw;
 }
 
 #nav-toggle:checked ~ .social-icons ul{
-    margin: 2em 5%;
+    margin-left: 1em;
+    flex-direction: column;
+}
+
+
+@media all and (max-width:1200px){
+    #nav-toggle:checked ~ .main-content {
+        margin-left: 7%;
+        width: 93vw;
+    }
+    #nav-toggle:checked + .sidebar{width: 7vw;}
+}
+
+@media all and (max-width:1000px){
+    .sidebar{width: 30vw;}
+    .main-content{margin-left: 30%;}
+}
+
+@media all and (max-width:750px){
+    #nav-toggle:checked ~ .main-content {
+        margin-left: 10%;
+        width: 90vw;
+    }
+    #nav-toggle:checked + .sidebar{width: 10vw;}
+    .main-content main .level{
+        flex-direction: column;
+        align-items: center;
+    }
+    .main-content .level .right{
+        margin-top: 1em;
+    }
+}
+
+@media all and (max-width:620px){
+    .sidebar{width: 50vw;}
+    .main-content{margin-left: 50%;}
+    .main-content .level .left .title{
+        font-size: 2em;
+    }
 }

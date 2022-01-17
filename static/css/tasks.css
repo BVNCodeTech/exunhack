@@ -332,8 +332,10 @@ main .title{
     #nav-toggle:checked + .sidebar{width: 10vw;}
 }
 
-@media all and (max-width:750px){
+@media all and (max-width:620px){
     .employees, .main .task .text{
         width: 90%;
     }
+    .sidebar{width: 50vw;}
+    .main-content{margin-left: 50%;}
 }
