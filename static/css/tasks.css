@@ -12,6 +12,8 @@ body{overflow-x: hidden;}
     height: 100vh;
     background: var(--dark-dark);
     color: white;
+    overflow:hidden;
+    z-index: 3;
     transition: width 500ms ease;
 }
 
@@ -61,6 +63,7 @@ body{overflow-x: hidden;}
     left: 0;
     margin: 2em;
     display: flex;
+    z-index: 5;
     transition: all 500ms ease;
 }
 
@@ -112,6 +115,7 @@ header .right .pfp img{
     height: 50px;
     margin: 0 1em;
 }
+
 header .right .name{
     font-family: 'Montserrat', sans-serif;
     color: white;
@@ -143,7 +147,8 @@ header .right .name{
 }
 
 #nav-toggle:checked ~ .social-icons ul{
-    margin: 2em 5%;
+    margin-left: 1em;
+    flex-direction: column;
 }
 
 main{
@@ -173,12 +178,30 @@ main .title{
 .main .task .text{
     width: 60%;
 }
+
+.main .task .head{
+    display: flex;
+    align-items: center;
+}
+
 .main .task .name{
     font-size: 2em;
     font-family: 'Poppins';
     margin-bottom: 10px;
 }
 
+.main .task .points{
+    margin-left: 4em;
+}
+
+.main .task .points:before{
+    content: '';
+    position: absolute;
+    transform: translate(-20px, 50%);
+    padding: 5px;
+    border-radius: 50%;
+    background: var(--green);
+}
 .main .progress-indicator{
     display: flex;
     align-items: center;
@@ -234,9 +257,22 @@ main .title{
     align-items: center;
 }
 
-.employees .dropdown .default i{
+.employees .dropdown .default .icons{
+    display: flex;
+    align-items: center;
+}
+.employees .dropdown .default .fa-caret-down{
     font-size: 2em;
     color: var(--purple);
+    border-right: 1px solid grey;
+    padding: 0 10px;
+}
+
+.employees .dropdown .default .fa-check{
+    font-size: 1.5em;
+    color: var(--purple);
+    padding: 0 10px;
+
 }
 .employees .dropdown ul{
     position: absolute;
@@ -247,6 +283,7 @@ main .title{
     border-radius: 5px;
     padding: 20px;
     display: none;
+    z-index: 3;
     box-shadow: 8px 8px 6px -10px #b3c6ff;
 }
   
@@ -264,4 +301,39 @@ main .title{
   
 .employees .dropdown ul li:hover{
     color: var(--purple);
+}
+
+@media all and (max-width:1200px){
+    #nav-toggle:checked ~ .main-content {
+        margin-left: 7%;
+        width: 93vw;
+    }
+    #nav-toggle:checked + .sidebar{width: 7vw;}
+}
+
+@media all and (max-width:1000px){
+    .sidebar{width: 30vw;}
+    .main-content{margin-left: 30%;}
+}
+
+@media all and (max-width:750px){
+    .main .task{
+        flex-direction: column;
+    }
+    .employees{
+        width: 60%;
+        margin-top: 1em;
+    }
+    .employees .dropdown{width: 100%;}
+    #nav-toggle:checked ~ .main-content {
+        margin-left: 10%;
+        width: 90vw;
+    }
+    #nav-toggle:checked + .sidebar{width: 10vw;}
+}
+
+@media all and (max-width:750px){
+    .employees, .main .task .text{
+        width: 90%;
+    }
 }

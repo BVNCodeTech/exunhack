@@ -60,18 +60,24 @@
 
             <main>
                 <div class="title">Tasks</div>
-                {% for task in tasks %}
+                <!-- {% for task in tasks %} -->
                 <div class="task">
                     <div class="text">
-                        <div class="name">Task 1</div>
+                        <div class="head">
+                            <div class="name">Task 1</div>
+                            <div class="points">100</div>
+                        </div>
                         <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat
                             corporis dolores at eve</div>
                     </div>
                     <div class="employees">
-                        <div class="dropdown">
-                            <div class="default">
+                        <div class="dropdown dropdown1">
+                            <div class="default default1">
                                 <div>John</div>
-                                <i class="fas fa-caret-down"></i>
+                                <div class="icons">
+                                    <i class="fas fa-caret-down"></i>
+                                    <a href=""><i class="fas fa-check"></i></a>
+                                </div>
                             </div>
                             <ul>
                                 <li>John</li>
@@ -87,15 +93,21 @@
                 </div>
                 <div class="task">
                     <div class="text">
-                        <div class="name">Task 2</div>
+                        <div class="head">
+                            <div class="name">Task 2</div>
+                            <div class="points">80</div>
+                        </div>
                         <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat
                             corporis dolores at eve</div>
                     </div>
                     <div class="employees">
-                        <div class="dropdown">
-                            <div class="default">
+                        <div class="dropdown dropdown2">
+                            <div class="default default2">
                                 <div>John</div>
-                                <i class="fas fa-caret-down"></i>
+                                <div class="icons">
+                                    <i class="fas fa-caret-down"></i>
+                                    <a href=""><i class="fas fa-check"></i></a>
+                                </div>
                             </div>
                             <ul>
                                 <li>John</li>
@@ -111,15 +123,21 @@
                 </div>
                 <div class="task">
                     <div class="text">
-                        <div class="name">Task 3</div>
+                        <div class="head">
+                            <div class="name">Task 3</div>
+                            <div class="points">40</div>
+                        </div>
                         <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat
                             corporis dolores at eve</div>
                     </div>
                     <div class="employees">
-                        <div class="dropdown">
-                            <div class="default">
+                        <div class="dropdown dropdown3">
+                            <div class="default default3">
                                 <div>John</div>
-                                <i class="fas fa-caret-down"></i>
+                                <div class="icons">
+                                    <i class="fas fa-caret-down"></i>
+                                    <a href=""><i class="fas fa-check"></i></a>
+                                </div>
                             </div>
                             <ul>
                                 <li>John</li>
@@ -140,16 +158,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
-<script>
-    $(".default").click(function () {
-        $(this).siblings(".dropdown ul").toggleClass("active");
-    });
-
-    $(".dropdown ul li").click(function () {
-        var text = $(this).text();
-        $(".default div").text(text);
-        $(".dropdown ul").removeClass("active");
-    });
-</script>
+<script src="../static/js/dropdown.js"></script>
 
 </html>
