@@ -6,6 +6,7 @@ from functions.users import *
 from functions.tasks import *
 from functions.rewards import *
 from functions.feedback import *
+from functions.training import *
 
 app = Flask(__name__)
 app.secret_key = 'HELIKOPTER HELIKOPTER'
@@ -302,6 +303,39 @@ def feedback_delete(id):
             return render_template('unauthorized.html')
     else:
         return redirect('/login')
+
+@app.route('/training')
+def training_loompas():
+    if session['login'] and session['user']:
+        return render_template('train.html', name=session['user'],training=get_all_training(), admin=check_admin(session['user']))
+    else:
+        return redirect('/login')
+
+@app.route('/training/add')
+def training_add():
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            return render_template('add_training.html', admin=check_admin(session['user']))
+        else:
+            return render_template('unauthorized.html')
+    else:
+        return redirect('/login')
+
+@app.route('/training/add/submit', methods = ['GET', 'POST'])
+def training_add_submit():
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            if request.method == 'POST':
+                data = request.form
+                flash(add_training(data.get('name'), data.get('description'), data.get('link'), data.get('points')))
+                return redirect('/training')
+            else:
+                return redirect('/training/add')
+        else:
+            return render_template('unauthorized.html')
+    else:
+        return redirect('/login')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
