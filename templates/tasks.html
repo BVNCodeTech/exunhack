@@ -63,9 +63,11 @@
                 <div class="title">Tasks</div>
                 {% for task in tasks %}
                 <div class="task">
+                    {% if admin %}
                     <form action="/tasks/remove/{{ task['unique_id'] }}" method="post">
                         <input type="submit" value="Remove">
                       </form>
+                    {% endif %}
                     <div class="text">
                         <div class="head">
                             <div class="name">{{ task['name'] }}</div>

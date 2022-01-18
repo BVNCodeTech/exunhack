@@ -157,6 +157,18 @@ def new_task_submit():
         return redirect('/login')
 
 
+@app.route('/tasks/complete/<id>', methods=["GET", "POST"])
+def completetask(id):
+    if session['user'] and session['login']:
+        if request.method == "POST":
+            flash(mark_task_as_complete(session['user'], int(id)))
+            return redirect('/tasks')
+        else:
+            return redirect('/tasks')
+    else:
+        return redirect('/login')
+        
+        
 @app.route('/tasks/remove/<id>', methods=['GET','POST'])
 def del_task(id):
     if session['login'] and session['user']:
@@ -224,6 +236,10 @@ def all_oompa_loompas():
             return 'Unauthorized'
     else:
         return redirect('/login')
+
+@app.route('/rewards')
+def rewards():
+    return render_template('rewards.html')
 
 
 if __name__ == '__main__':

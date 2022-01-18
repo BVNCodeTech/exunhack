@@ -80,3 +80,16 @@ def get_user_tasks(email):
     for task_id in user['tasks']:    
         tasks.append(task_collection.find_one({'unique_id':int(task_id)}))
     return tasks
+
+def get_task_by_unique_id(unique_id):
+    return task_collection.find_one({'unique_id':int(unique_id)})
+
+def mark_task_as_complete(user, unique_id):
+    user = get_user_by_id(user)
+    tasks = user['tasks']
+    tasks.remove(int(unique_id))
+    user_points = user['points'] + get_task_by_unique_id(unique_id)['points']
+    if not tasks:
+        tasks = []
+    user_collection.find_one_and_update({'_id':user['_id']}, {'$set':{'tasks':tasks, 'points':int(user_points)}})
+    return 'Task marked as complete'
