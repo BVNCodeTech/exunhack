@@ -54,104 +54,54 @@
                     <div class="pfp">
                         <img src="../static/images/user.png" alt="">
                     </div>
-                    <div class="name">{{email}}</div>
+                    <div class="name">{{ name }}</div>
                 </div>
             </header>
 
             <main>
+                
                 <div class="title">Tasks</div>
-                <!-- {% for task in tasks %} -->
+                {% for task in tasks %}
                 <div class="task">
                     <div class="text">
                         <div class="head">
-                            <div class="name">Task 1</div>
-                            <div class="points">100</div>
+                            <div class="name">{{ task['name'] }}</div>
+                            <div class="points">{{ task['points'] }}</div>
                         </div>
-                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat
-                            corporis dolores at eve</div>
+                        <div class="desc">{{ task['description'] }}</div>
                     </div>
                     <div class="employees">
-                        <div class="dropdown dropdown1">
-                            <div class="default default1">
-                                <div>John</div>
-                                <div class="icons">
-                                    <i class="fas fa-caret-down"></i>
-                                    <a href=""><i class="fas fa-check"></i></a>
-                                </div>
-                            </div>
-                            <ul>
-                                <li>John</li>
-                                <li>Doe</li>
-                                <li>Pancham</li>
-                            </ul>
-                        </div>
+                        {% if admin %}
+                        <form action="/tasks/assign/{{ task['unique_id'] }}" method="post">
+                            <select id="users" name="users">
+                                <option value="">Assign</option>
+                            {% for user in task['unassigned_users'] %}
+                              <option value="{{ user }}">{{ user }}</option>
+                             {% endfor %}
+                            </select>
+                            <input type="submit">
+                          </form>
+                        {% endif %}
+                        {% if not admin %}
+                        <form action="/tasks/complete/{{ task['unique_id'] }}" method="post">
+                            <!-- <select id="users" name="users">
+                                <option value="">Assign</option>
+                            {% for user in task['unassigned_users'] %}
+                              <option value="{{ user }}">{{ user }}</option>
+                             {% endfor %}
+                            </select> -->
+                            <input type="submit" value="Mark as Complete">
+                          </form>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="progress-indicator">
                     <div class="progress-bar"></div>
                     <div class="number">60%</div>
                 </div>
-                <div class="task">
-                    <div class="text">
-                        <div class="head">
-                            <div class="name">Task 2</div>
-                            <div class="points">80</div>
-                        </div>
-                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat
-                            corporis dolores at eve</div>
-                    </div>
-                    <div class="employees">
-                        <div class="dropdown dropdown2">
-                            <div class="default default2">
-                                <div>John</div>
-                                <div class="icons">
-                                    <i class="fas fa-caret-down"></i>
-                                    <a href=""><i class="fas fa-check"></i></a>
-                                </div>
-                            </div>
-                            <ul>
-                                <li>John</li>
-                                <li>Doe</li>
-                                <li>Pancham</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-indicator">
-                    <div class="progress-bar"></div>
-                    <div class="number">60%</div>
-                </div>
-                <div class="task">
-                    <div class="text">
-                        <div class="head">
-                            <div class="name">Task 3</div>
-                            <div class="points">40</div>
-                        </div>
-                        <div class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quisquam fugiat
-                            corporis dolores at eve</div>
-                    </div>
-                    <div class="employees">
-                        <div class="dropdown dropdown3">
-                            <div class="default default3">
-                                <div>John</div>
-                                <div class="icons">
-                                    <i class="fas fa-caret-down"></i>
-                                    <a href=""><i class="fas fa-check"></i></a>
-                                </div>
-                            </div>
-                            <ul>
-                                <li>John</li>
-                                <li>Doe</li>
-                                <li>Pancham</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-indicator">
-                    <div class="progress-bar"></div>
-                    <div class="number">60%</div>
-                </div>
+                {% endfor %}
             </main>
+
         </div>
 
     </div>

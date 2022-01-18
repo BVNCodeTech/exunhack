@@ -1,7 +1,6 @@
 
 {% if not edit %}
 <form method="post" action="/tasks/add/submit">
-    <input name="email" placeholder='email' type="text" required>
     <input name="name" placeholder='name' type="text" required>
     <input name='description' placeholder="description" type="text" required>
     <input name='deadline' placeholder="deadline" type="date" required>
@@ -11,7 +10,6 @@
     {% endif %}
     {% if edit %}
     <form method="post" action="/tasks/edit/{{ id }}/submit">
-    <input name="email" placeholder='email' type="text" value="{{ data['email'] }}" required>
     <input name="name" placeholder='name' type="text" value="{{ data['name'] }}" required>
     <input name='description' placeholder="description" type="text" value="{{ data['description'] }}" required>
     <input name='deadline' placeholder="deadline" type="date" value="{{ data['deadline'] }}" required>
