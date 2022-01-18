@@ -4,6 +4,8 @@ from flask.templating import render_template
 from werkzeug.utils import redirect
 from functions.users import *
 from functions.tasks import *
+from functions.rewards import *
+from functions.feedback import *
 
 app = Flask(__name__)
 app.secret_key = 'HELIKOPTER HELIKOPTER'
@@ -44,7 +46,7 @@ def submitlogin():
             session['login'] = True
             session['user'] = email
             flash('Succesfully Logged in!')
-            return redirect('/')
+            return redirect('/dashboard')
         elif not check:
             session['login'] = False
             flash('false')
@@ -69,7 +71,7 @@ def signup():
     if check_admin(session['user']):
         return render_template('signup.html')
     else:
-        return 'Unauthorized'
+        return render_template('unauthorized.html')
 
 
 @app.route('/signup/submit', methods=['GET', 'POST'])
@@ -93,7 +95,7 @@ def registerUser():
 @app.route('/dashboard')
 def dashboard():
     if session['login'] and session['user']:
-        return render_template('dashboard.html', name=get_user_by_id(session['user'])['name'])
+        return render_template('dashboard.html', name=get_user_by_id(session['user'])['name'], admin=check_admin(session['user']))
     else:
         return redirect('/login')
 
@@ -125,7 +127,7 @@ def get_one_task(id):
             object_id = get_all_tasks()[int(id)]['_id']
             return str(get_task(object_id))
         else:
-            return 'Unauthorized'
+            return render_template('unauthorized.html')
     else:
         return redirect('/login')
 
@@ -134,9 +136,9 @@ def get_one_task(id):
 def new_task():
     if session['login'] and session['user']:
         if check_admin(session['user']):
-            return render_template('add_task.html', edit = False)
+            return render_template('add_task.html', edit = False, admin=check_admin(session['user']))
         else:
-                return 'Unauthorized'
+            return render_template('unauthorized.html')
     else:
         return redirect('/login')
 
@@ -152,7 +154,7 @@ def new_task_submit():
             else:
                 return redirect('/tasks/add')
         else:
-            return 'Unauthorized'
+            return render_template('unauthorized.html')
     else:
         return redirect('/login')
 
@@ -176,7 +178,7 @@ def del_task(id):
             flash(remove_task(id))
             return redirect('/tasks')
         else:
-            return 'Unauthorized'
+            return render_template('unauthorized.html')
     else:
         return redirect('/login')
 
@@ -186,9 +188,9 @@ def edit_exis_task(id):
     if session['login'] and session['user']:
         if check_admin(session['user']):
             task = get_all_tasks()[int(id)]
-            return render_template('add_task.html', edit=True, data=task, id=str(id))
+            return render_template('add_task.html', edit=True, data=task, id=str(id), admin=check_admin(session['user']))
         else:
-            return 'Unauthorized'
+            return render_template('unauthorized.html')
     else:
         return redirect('/login')
 
@@ -205,7 +207,7 @@ def edit_task_submit(id):
             else:
                 return redirect('/tasks/edit/<id>')
         else:
-            return 'Unauthorized'
+            return render_template('unauthorized.html')
     else:
         return redirect('/login')
 
@@ -231,16 +233,75 @@ def assign_task(id):
 def all_oompa_loompas():
     if session['login'] and session['user']:
         if check_admin(session['user']):
-            return render_template('workers.html', users=get_all_users(), name=get_user_by_id(session['user'])['name'])
+            return render_template('workers.html', users=get_all_users(), name=get_user_by_id(session['user'])['name'], admin=check_admin(session['user']))
         else:
-            return 'Unauthorized'
+            return render_template('unauthorized.html')
     else:
         return redirect('/login')
 
 @app.route('/rewards')
 def rewards():
-    return render_template('rewards.html')
+    if session['login'] and session['user']:
+        return render_template('rewards.html', name=get_user_by_id(session['user'])['name'], rewards=get_all_rewards(), admin=check_admin(session['user']))
+    else:
+        return redirect('/login')
 
+@app.route('/rewards/<reward>', methods=['GET','POST'])
+def redeem_reward(reward):
+    if session['login'] and session['user']:
+        flash(claim_reward(session['user'], reward))
+        return redirect('/rewards')
+    else:
+        return redirect('/login')
+
+@app.route('/feedback')
+def feedback():
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            return render_template('feedback_admin.html', read_feedback=get_read_feedback(), unread_feedback=get_unread_feedback(), name=get_user_by_id(session['user'])['name'])
+        else:
+            return render_template('feedback.html', name=get_user_by_id(session['user'])['name'], admin=check_admin(session['user']))
+    else:
+        return redirect('/login')
+
+@app.route('/feedback/submit', methods=['GET','POST'])
+def submit_feedback():
+    if session['login'] and session['user']:
+        if request.method == 'POST':
+            flash(add_feedback(request.form.get('feedback')))
+            return redirect('/feedback')
+        else:
+            return redirect('/feedback')
+    else:
+        return redirect('/login')
+
+@app.route('/feedback/read/<id>', methods=['GET','POST'])
+def read_feedback(id):
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            if request.method == 'POST':
+                flash(mark_feedback_as_read(id))
+                return redirect('/feedback')
+            else:
+                return redirect('/feedback')
+        else:
+            return render_template('unauthorized.html')
+    else:
+        return redirect('/login')
+
+@app.route('/feedback/delete/<id>', methods=['GET','POST'])
+def feedback_delete(id):
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            if request.method == 'POST':
+                flash(delete_feedback(id))
+                return redirect('/feedback')
+            else:
+                return redirect('/feedback')
+        else:
+            return render_template('unauthorized.html')
+    else:
+        return redirect('/login')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -22,14 +22,18 @@
             <div class="logo">Logo</div>
             <div class="nav">
                 <ul>
-                    <li><a href=""><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
+                    <li><a href="/dashboard"><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
                                 class="text">Dashboard</span></a></li>
-                    <li><a href=""><span class="icon"><i class="fas fa-signal"></i></span><span
+                    <li><a href="/tasks"><span class="icon"><i class="fas fa-signal"></i></span><span
                                 class="text">Tasks</span></a></li>
                     <li><a href="" class="active"><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
-                    <li><a href=""><span class="icon"><i class="fas fa-info"></i></span><span
-                                class="text">Workers</span></a></li>
+                    <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
+                        class="text">Feedback</span></a></li> 
+                        {% if admin %}
+                        <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
+                                    class="text">Workers</span></a></li>
+                        {% endif %}
                 </ul>
             </div>
         </div>
@@ -54,48 +58,33 @@
                     <div class="pfp">
                         <img src="../static/images/user.png" alt="">
                     </div>
-                    <div class="name">John Doe</div>
+                    <div class="name">{{ name }}</div>
                 </div>
             </header>
             <main>
+                
                 <div class="title">Rewards</div>
                 <div class="reward-container">
+                    {% for reward in rewards %}
                     <div class="reward">
                         <div class="inner">
                             <div class="img-container">
-                                <i class="fas fa-chart-line"></i>
+                                <i class="fas fa-{{ reward['icon'] }}"></i>
                             </div>
-                            <div class="name">Request coco beans</div>
-                            <div class="desc">Lorem g elit. Rerum repellendus odio qunt nemo illo quod amet est cupiditate eligendi, minus deleniti ad.</div>
-                            <div class="btn">Reedem!</div>
+                            <div class="name">{{ reward['name'] }}</div>
+                            <div class="desc">{{ reward['description'] }}</div>
+                            <a style="color: aliceblue;" href="/rewards/{{ reward['redirect'] }}"><div class="btn">Reedem @ {{ reward['points'] }}pts.</div></a>
                         </div>
                     </div>
-                    <div class="reward">
-                        <div class="inner">
-                            <div class="img-container">
-                                <i class="fas fa-cookie"></i>
-                            </div>
-                            <div class="name">kissie from bablucopter</div>
-                            <div class="desc">Lorem ipsuit. Rerum repellendus odio qunt nemo illo quod amet est cupiditate eligendi, minus deleniti ad.</div>
-                            <div class="btn">Reedem!</div>
-                        </div>
-                    </div>
-                    <div class="reward">
-                        <div class="inner">
-                            <div class="img-container">
-                                <i class="far fa-calendar-minus"></i>
-                            </div>
-                            <div class="name">Day off</div>
-                            <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum repellendus odio qunt nemo ileniti ad.</div>
-                            <div class="btn">Reedem!</div>
-                        </div>
-                    </div>
+                    {% endfor %}    
                     </div>
                 </div>
+        
             </main>
         </div>
 
     </div>
+
 </body>
 
 </html>

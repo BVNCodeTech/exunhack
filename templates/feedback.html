@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fuck</title>
+    <title>Register</title>
     <link rel="stylesheet" href="../static/css/parent.css">
-    <link rel="stylesheet" href="../static/css/dashboards.css">
+    <link rel="stylesheet" href="../static/css/add_task.css">
     <link rel="stylesheet" href="../static/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,18 +22,18 @@
             <div class="logo">Logo</div>
             <div class="nav">
                 <ul>
-                    <li><a href="" class="active"><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
+                    <li><a href="/dashboard" ><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
                                 class="text">Dashboard</span></a></li>
-                    <li><a href="/tasks" ><span class="icon"><i class="fas fa-signal"></i></span><span
+                    <li><a href="/tasks"><span class="icon"><i class="fas fa-signal"></i></span><span
                                 class="text">Tasks</span></a></li>
                     <li><a href="/rewards"><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
-                    <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
-                        class="text">Feedback</span></a></li> 
-                        {% if admin %}
-                        <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
-                                    class="text">Workers</span></a></li>
-                        {% endif %}
+                    <li><a href="" class="active"><span class="icon"><i class="fas fa-comment"></i></span><span
+                        class="text">Feedback</span></a></li>
+                    {% if admin %}
+                    <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
+                                class="text">Workers</span></a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -62,39 +62,21 @@
                 </div>
             </header>
             <main>
-                <div class="welcome">
-                    <div class="title">Welcome {{ name }}</div>
-                    <div class="desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio numquam neque
-                        saepe doloribus odit vel, ipsum ?</div>
-                </div>
-                <div class="level">
-                    <div class="left">
-                        <div class="title">Level 1</div>
-                        <div class="level-points">980/1000</div>
-                    </div>
-                    <div class="right">
-
-                        <div class="outer">
-                            <div class="inner">
-                                <div class="number">80%</div>
-                            </div>
+                <div class="form-container">
+                    <h1>Anonymous Feeback</h1>
+                    {% if not admin %}
+                    <form method="post" action="/feedback/submit">
+                        <div class="txt_field">
+                            <input name="feedback" type="text" required>
+                            <span></span>
+                            <label>Feedback</label>
                         </div>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
-                            <defs>
-                                <linearGradient id="GradientColor">
-                                    <stop offset="0%" stop-color="#e91e63" />
-                                    <stop offset="100%" stop-color="#673ab7" />
-                                </linearGradient>
-                            </defs>
-                            <circle cx="80" cy="80" r="70" stroke-linecap="round" />
-                        </svg>
-                    </div>
+                        <input type="submit">
+                    </form>     
+                    {% endif %}     
                 </div>
             </main>
         </div>
-
     </div>
 </body>
-
 </html>

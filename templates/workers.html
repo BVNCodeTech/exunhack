@@ -26,10 +26,14 @@
                                 class="text">Dashboard</span></a></li>
                     <li><a href="/tasks"><span class="icon"><i class="fas fa-signal"></i></span><span
                                 class="text">Tasks</span></a></li>
-                    <li><a href=""><span class="icon"><i class="fas fa-coins"></i></span><span
+                    <li><a href="/rewards"><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
-                    <li><a href="" class="active"><span class="icon"><i class="fas fa-info"></i></span><span
-                                class="text">Workers</span></a></li>
+                    <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
+                        class="text">Feedback</span></a></li>
+                        {% if admin %}
+                        <li><a href=""><span class="icon"><i class="fas fa-info"></i></span><span
+                                    class="text">Workers</span></a></li>
+                        {% endif %}
                 </ul>
             </div>
         </div>

@@ -1,0 +1,116 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    color: white;
+}
+
+.main{
+    background: url('../images/bg.png');
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main .box{
+    position: relative;
+    width: 800px;
+    height: 800px;
+    background: #292a2c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgb(0 0 0 / 15%) -69.091px 72.9294px 121.549px, rgb(0 0 0 / 11%) -49.8991px 56.2964px 70.002px, rgb(0 0 0 / 9%) -81.8857px 69.091px 38.0722px;
+    font-family: 'Poppins';
+    text-align: center;
+    color: white;
+}
+
+nav{
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15vh;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 50px;
+}
+
+nav .logo{
+    font-family: 'poppins';
+    font-weight: bold;
+    font-size: 2em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+nav .navbar ul{
+    display: flex;
+    align-items: center;
+}
+
+nav .navbar li a{
+    position: relative;
+    font-family: 'Poppins';
+    margin: 0 2em ;
+    padding-bottom: 5px;
+    border-bottom: 4px solid var(--purple);
+    transition: 300ms ease-out;
+    color: white;
+}
+
+nav .navbar li a:before{
+    content: '';
+    border: 2px solid var(--green);
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    transition: 300ms ease-out;
+    z-index: -1;
+}
+
+nav .navbar li a:hover::before{
+    width: 100%;
+    z-index: 1;
+}
+
+.main .box .title{
+    font-size: 15em;
+    color: var(--purple);
+}
+
+.main .box .subtitle{
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
+@media all and (max-height: 850px){
+    .main .box{
+        height: 80vh;
+    }
+}
+
+@media all and (max-width: 900px){
+    .main .box{
+        width: 80vw;
+    }
+}
+
+@media all and (max-width: 720px){
+    nav .navbar li a{margin: 0 10px;}
+    .main .box{
+        font-size: 80%;
+    }
+}
+
+@media all and (max-width: 500px){
+    nav{padding: 0 10px;}
+    .main .box .title{font-size: 12em;}
+    .main .box .subtitle{font-size: 1em;}
+}

@@ -1,5 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
 
-{% if not edit %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../static/css/parent.css">
+    <link rel="stylesheet" href="../static/css/add_task.css">
+    <link rel="stylesheet" href="../static/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="main">
+        <input type="checkbox" name="" id="nav-toggle">
+        <div class="sidebar">
+            <div class="logo">Logo</div>
+            <div class="nav">
+                <ul>
+                    <li><a href="/dashboard" ><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
+                                class="text">Dashboard</span></a></li>
+                    <li><a href="/tasks" class="active"><span class="icon"><i class="fas fa-signal"></i></span><span
+                                class="text">Tasks</span></a></li>
+                    <li><a href="/rewards"><span class="icon"><i class="fas fa-coins"></i></span><span
+                                class="text">Rewards</span></a></li>
+                    <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
+                        class="text">Feedback</span></a></li>            
+                        {% if admin %}
+                        <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
+                                    class="text">Workers</span></a></li>
+                        {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="social-icons">
+            <ul>
+                <li><a href=""><i class="fab fa-facebook"></i></a></li>
+                <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                <li><a href=""><i class="fas fa-newspaper"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="overlay"></div>
+            <header>
+                <div class="left">
+                    <label for="nav-toggle">
+                        <i class="fas fa-bars"></i>
+                    </label>
+                </div>
+                <div class="right">
+                    <div class="pfp">
+                        <img src="../static/images/user.png" alt="">
+                    </div>
+                    <div class="name">{{ name }}</div>
+                </div>
+            </header>
+            <main>
+                <div class="form-container">
+                    <h1>Add task</h1>
+                    {% if not edit %}
+                    <form method="post" action="/tasks/add/submit">
+                        <div class="txt_field">
+                            <input name="name" type="text" required>
+                            <span></span>
+                            <label>Name</label>
+                        </div>
+                        <div class="txt_field">
+                            <input name='description' type="text" required>
+                            <span></span>
+                            <label>Description </label>
+                        </div>
+                        <div class="txt_field">
+                            <input name='deadline' type="date" value="" required>
+                            <span></span>
+                            <label>Date</label>
+                        </div>
+                        <div class="txt_field">
+                            <input name="points" type="number" required>
+                            <span></span>
+                            <label>Points</label>
+                        </div>
+                        <input type="submit">
+                    </form>
+                    {% endif %}
+                    {% if edit %}
+                    <form method="post" action="/tasks/edit/{{ id }}/submit">
+                        <div class="txt_field">
+                            <input name="name" type="text" value="{{ data['name'] }}" required>
+                            <span></span>
+                            <label>Name</label>
+                        </div>
+                        <div class="txt_field">
+                            <input name='description' type="text" value="{{ data['description'] }}" required>
+                            <span></span>
+                            <label>Description </label>
+                        </div>
+                        <div class="txt_field">
+                            <input name='deadline' type="date" value="{{ data['deadline'] }}" required>
+                            <span></span>
+                            <label>Date</label>
+                        </div>
+                        <div class="txt_field">
+                            <input name="points" type="number" value="{{ data['points'] }}" required>
+                            <span></span>
+                            <label>Points</label>
+                        </div>
+                        <input type="submit">
+                    </form>
+                    {% endif %}
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- {% if not edit %}
 <form method="post" action="/tasks/add/submit">
     <input name="name" placeholder='name' type="text" required>
     <input name='description' placeholder="description" type="text" required>
@@ -16,4 +138,4 @@
     <input name="points" placeholder="points" type="number" value="{{ data['points'] }}" required>
     <input type='submit'>
     {% endif %}
-</form>
+</form> -->
