@@ -137,7 +137,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab:wght@400;700&display=swap"
         rel="stylesheet">
-</head> 
+    <style>
+        .main .progress-indicator .progress-bar::before{
+            width: calc((10/100) * 100%);
+        }
+    </style>
+</head>
 
 <body>
     <div class="main">
@@ -146,18 +151,18 @@
             <div class="logo">Logo</div>
             <div class="nav">
                 <ul>
-                    <li><a href="/dashboard" ><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
+                    <li><a href="/dashboard"><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
                                 class="text">Dashboard</span></a></li>
                     <li><a href="" class="active"><span class="icon"><i class="fas fa-signal"></i></span><span
                                 class="text">Tasks</span></a></li>
                     <li><a href="/rewards"><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
                     <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
-                        class="text">Feedback</span></a></li> 
-                        {% if admin %}
-                        <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
-                                    class="text">Workers</span></a></li>
-                        {% endif %}
+                                class="text">Feedback</span></a></li>
+                    {% if admin %}
+                    <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
+                                class="text">Workers</span></a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -187,21 +192,18 @@
             </header>
 
             <main>
-                <div class="head">
+                <div class="me">
                     <div class="title">Tasks</div>
                     {% if admin %}
-                    <a href="/tasks/add"><div class="add-task-btn">
-                        <i class="fas fa-plus"></i>
-                    </div></a>
+                    <a href="/tasks/add">
+                        <div class="add-task-btn">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </a>
                     {% endif %}
                 </div>
                 {% for task in tasks %}
                 <div class="task">
-                    {% if admin %}
-                    <form action="/tasks/remove/{{ task['unique_id'] }}" method="post">
-                        <input type="submit" value="Remove">
-                      </form>
-                    {% endif %}
                     <div class="text">
                         <div class="head">
                             <div class="name">{{ task['name'] }}</div>
@@ -214,12 +216,17 @@
                         <form action="/tasks/assign/{{ task['unique_id'] }}" method="post">
                             <select id="users" name="users">
                                 <option value="">Assign</option>
-                            {% for user in task['unassigned_users'] %}
-                              <option value="{{ user }}">{{ user }}</option>
-                             {% endfor %}
+                                {% for user in task['unassigned_users'] %}
+                                <option value="{{ user }}">{{ user }}</option>
+                                {% endfor %}
                             </select>
                             <input type="submit">
-                          </form>
+                        </form>
+                        {% endif %}
+                        {% if admin %}
+                        <form action="/tasks/remove/{{ task['unique_id'] }}" method="post">
+                            <input type="submit" value="Remove">
+                        </form>
                         {% endif %}
                         {% if not admin %}
                         <form action="/tasks/complete/{{ task['unique_id'] }}" method="post">
@@ -230,7 +237,7 @@
                              {% endfor %}
                             </select> -->
                             <input type="submit" value="Mark as Complete">
-                          </form>
+                        </form>
                         {% endif %}
                     </div>
                 </div>
@@ -238,10 +245,10 @@
                     <div class="progress-bar"></div>
                     <div class="number">60%</div>
                 </div>
-                
+
                 {% endfor %}
             </main>
-            
+
         </div>
 
     </div>

@@ -116,7 +116,7 @@ header .right .name{
 }
 
 .main-content main{
-    padding: 5% 0;
+    padding: 3% 0;
     position: relative;
     z-index: 2;
 }
@@ -253,7 +253,26 @@ circle{
     flex-direction: column;
 }
 
+.cards{
+    width: 80%;
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
 
+.cards .card{
+    width: 30%;
+    padding: 3em;
+    background: #292a2c;
+    box-shadow: rgb(0 0 0 / 15%) -69.091px 72.9294px 121.549px, rgb(0 0 0 / 11%) -49.8991px 56.2964px 70.002px, rgb(0 0 0 / 9%) -81.8857px 69.091px 38.0722px;
+    text-align:center;
+}
+
+.cards .card .title{
+    font-family: 'Poppins';
+    font-size: 1.5em;
+}
 @media all and (max-width:1200px){
     #nav-toggle:checked ~ .main-content {
         margin-left: 7%;

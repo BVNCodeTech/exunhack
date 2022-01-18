@@ -58,20 +58,13 @@
                     <div class="pfp">
                         <img src="../static/images/user.png" alt="">
                     </div>
-<<<<<<< HEAD
-                    <div class="name">John Doe</div>
-=======
                     <div class="name">{{ name }}</div>
->>>>>>> 49776b50ba2a74e689a67dc9e3dfbb7ee46eafef
                 </div>
             </header>
             <main>
                 <div class="form-container">
                     <h1>Add task</h1>
-<<<<<<< HEAD
-=======
                     {% if not edit %}
->>>>>>> 49776b50ba2a74e689a67dc9e3dfbb7ee46eafef
                     <form method="post" action="/tasks/add/submit">
                         <div class="txt_field">
                             <input name="name" type="text" required>
@@ -95,8 +88,6 @@
                         </div>
                         <input type="submit">
                     </form>
-<<<<<<< HEAD
-=======
                     {% endif %}
                     {% if edit %}
                     <form method="post" action="/tasks/edit/{{ id }}/submit">
@@ -123,7 +114,6 @@
                         <input type="submit">
                     </form>
                     {% endif %}
->>>>>>> 49776b50ba2a74e689a67dc9e3dfbb7ee46eafef
                 </div>
             </main>
         </div>

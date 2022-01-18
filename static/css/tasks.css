@@ -157,7 +157,7 @@ main{
     position: relative;
 }
 
-main .head{
+main .me{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -294,13 +294,6 @@ main .title{
     color: grey;
 }
 
-.employees form #users option{
-    font-family: 'poppins';
-    font-weight: lighter;
-    width: 100%;
-    background: white;
-    padding: 20px 10px;
-}
 .employees form input{
     text-transform: uppercase;
     padding: 5px 10px;
@@ -324,21 +317,23 @@ main .title{
         width: 93vw;
     }
     #nav-toggle:checked + .sidebar{width: 7vw;}
+    .main .task{
+        flex-direction: column;
+    }
+    .employees{
+        margin-top: 1em;
+    }
 }
 
 @media all and (max-width:1000px){
     .sidebar{width: 30vw;}
     .main-content{margin-left: 30%;}
+    .main .task .text {
+        width: 100%;
+    }
 }
 
 @media all and (max-width:750px){
-    .main .task{
-        flex-direction: column;
-    }
-    .employees{
-        width: 60%;
-        margin-top: 1em;
-    }
     .employees .dropdown{width: 100%;}
     #nav-toggle:checked ~ .main-content {
         margin-left: 10%;

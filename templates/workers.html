@@ -13,6 +13,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab:wght@400;700&display=swap"
         rel="stylesheet">
+    <style>
+        main .task{
+            width: 800px;
+            margin: 2em auto;
+            margin-bottom: 2em;
+        }
+        main{
+            display: flex;
+            flex-direction: column;
+        }
+        main .title{margin: auto;}
+    </style>
 </head>
 
 <body>
@@ -29,11 +41,11 @@
                     <li><a href="/rewards"><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
                     <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
-                        class="text">Feedback</span></a></li>
-                        {% if admin %}
-                        <li><a href=""><span class="icon"><i class="fas fa-info"></i></span><span
-                                    class="text">Workers</span></a></li>
-                        {% endif %}
+                                class="text">Feedback</span></a></li>
+                    {% if admin %}
+                    <li><a href=""><span class="icon"><i class="fas fa-info"></i></span><span
+                                class="text">Workers</span></a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -63,7 +75,7 @@
             </header>
 
             <main>
-                
+
                 <div class="title">Oompa Loompas</div>
                 {% for user in users %}
                 <div class="task">
@@ -73,7 +85,12 @@
                         </div>
                         <div class="desc">{{ user['_id'] }}</div>
                     </div>
+                    <div class="employees">
+                        <form action='/workers/edit/{{ user["_id"]}} ' method="post">
+                            <input type="submit" value="Edit">
+                        </form>
                     </div>
+                </div>
                 {% endfor %}
             </main>
 
