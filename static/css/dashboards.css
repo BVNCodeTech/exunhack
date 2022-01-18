@@ -4,6 +4,10 @@
     --offset: calc(472 - (80/100)*472);
 }
 
+.main-content .left i {
+    font-size: 2em;
+}
+
 body{overflow-x: hidden;}
 
 .sidebar{

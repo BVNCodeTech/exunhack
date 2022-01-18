@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fuck</title>
+    <title>Register</title>
     <link rel="stylesheet" href="../static/css/parent.css">
-    <link rel="stylesheet" href="../static/css/rewards.css">
+    <link rel="stylesheet" href="../static/css/add_task.css">
     <link rel="stylesheet" href="../static/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,18 +22,18 @@
             <div class="logo">Logo</div>
             <div class="nav">
                 <ul>
-                    <li><a href="/dashboard"><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
+                    <li><a href="/dashboard" ><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
                                 class="text">Dashboard</span></a></li>
                     <li><a href="/tasks"><span class="icon"><i class="fas fa-signal"></i></span><span
                                 class="text">Tasks</span></a></li>
-                    <li><a href="" class="active"><span class="icon"><i class="fas fa-coins"></i></span><span
+                    <li><a href="/rewards"><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
-                    <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
-                        class="text">Feedback</span></a></li> 
-                        {% if admin %}
-                        <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
-                                    class="text">Workers</span></a></li>
-                        {% endif %}
+                    <li><a href="" class="active"><span class="icon"><i class="fas fa-comment"></i></span><span
+                        class="text">Feedback</span></a></li>
+                    {% if admin %}
+                    <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
+                                class="text">Workers</span></a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -62,29 +62,21 @@
                 </div>
             </header>
             <main>
-                
-                <div class="title">Rewards</div>
-                <div class="reward-container">
-                    {% for reward in rewards %}
-                    <div class="reward">
-                        <div class="inner">
-                            <div class="img-container">
-                                <i class="fas fa-{{ reward['icon'] }}"></i>
-                            </div>
-                            <div class="name">{{ reward['name'] }}</div>
-                            <div class="desc">{{ reward['description'] }}</div>
-                            <a style="color: aliceblue;" href="/rewards/{{ reward['redirect'] }}"><div class="btn">Reedem @ {{ reward['points'] }}pts.</div></a>
+                <div class="form-container">
+                    <h1>Anonymous Feeback</h1>
+                    {% if not admin %}
+                    <form method="post" action="/feedback/submit">
+                        <div class="txt_field">
+                            <input name="feedback" type="text" required>
+                            <span></span>
+                            <label>Feedback</label>
                         </div>
-                    </div>
-                    {% endfor %}    
-                    </div>
+                        <input type="submit">
+                    </form>     
+                    {% endif %}     
                 </div>
-        
             </main>
         </div>
-
     </div>
-
 </body>
-
 </html>

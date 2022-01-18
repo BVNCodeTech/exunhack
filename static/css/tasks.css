@@ -277,7 +277,6 @@ main .title{
   }
 .employees form{
     display: flex;
-    width: 200px;
     color: grey;
     cursor: pointer;
 }

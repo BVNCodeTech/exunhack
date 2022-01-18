@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fuck</title>
     <link rel="stylesheet" href="../static/css/parent.css">
-    <link rel="stylesheet" href="../static/css/rewards.css">
+    <link rel="stylesheet" href="../static/css/tasks.css">
     <link rel="stylesheet" href="../static/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,12 +26,12 @@
                                 class="text">Dashboard</span></a></li>
                     <li><a href="/tasks"><span class="icon"><i class="fas fa-signal"></i></span><span
                                 class="text">Tasks</span></a></li>
-                    <li><a href="" class="active"><span class="icon"><i class="fas fa-coins"></i></span><span
+                    <li><a href="/rewards"><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
                     <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
-                        class="text">Feedback</span></a></li> 
+                        class="text">Feedback</span></a></li>
                         {% if admin %}
-                        <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
+                        <li><a href=""><span class="icon"><i class="fas fa-info"></i></span><span
                                     class="text">Workers</span></a></li>
                         {% endif %}
                 </ul>
@@ -61,30 +61,28 @@
                     <div class="name">{{ name }}</div>
                 </div>
             </header>
+
             <main>
                 
-                <div class="title">Rewards</div>
-                <div class="reward-container">
-                    {% for reward in rewards %}
-                    <div class="reward">
-                        <div class="inner">
-                            <div class="img-container">
-                                <i class="fas fa-{{ reward['icon'] }}"></i>
-                            </div>
-                            <div class="name">{{ reward['name'] }}</div>
-                            <div class="desc">{{ reward['description'] }}</div>
-                            <a style="color: aliceblue;" href="/rewards/{{ reward['redirect'] }}"><div class="btn">Reedem @ {{ reward['points'] }}pts.</div></a>
+                <div class="title">Oompa Loompas</div>
+                {% for user in users %}
+                <div class="task">
+                    <div class="text">
+                        <div class="head">
+                            <div class="name">{{ user['name'] }}</div>
                         </div>
+                        <div class="desc">{{ user['_id'] }}</div>
                     </div>
-                    {% endfor %}    
                     </div>
-                </div>
-        
+                {% endfor %}
             </main>
+
         </div>
 
     </div>
-
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script src="../static/js/dropdown.js"></script>
 
 </html>

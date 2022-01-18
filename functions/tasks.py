@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import urllib
 import random
-import ssl
+from functions.users import get_user_by_id, get_user_by_name
 
 host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
 client = MongoClient(host, tls=True, tlsAllowInvalidCertificates=True)
@@ -15,7 +15,15 @@ def add_task(name, description, deadline, points):
     return 'New task added'
 
 def remove_task(id):
-    task_collection.delete_one({'_id':id})
+    users = get_users_with_this_task(id)
+    for user_name in users:
+        user = get_user_by_name(user_name)
+        tasks = user['tasks']
+        tasks.remove(int(id))
+        if not tasks:
+            tasks = []
+        user_collection.find_one_and_update({'_id':user['_id']}, {'$set':{'tasks':tasks}})
+        task_collection.delete_one({'unique_id':int(id)})
     return 'Task removed'
 
 def edit_task(id, name, description, deadline, points):
@@ -72,3 +80,16 @@ def get_user_tasks(email):
     for task_id in user['tasks']:    
         tasks.append(task_collection.find_one({'unique_id':int(task_id)}))
     return tasks
+
+def get_task_by_unique_id(unique_id):
+    return task_collection.find_one({'unique_id':int(unique_id)})
+
+def mark_task_as_complete(user, unique_id):
+    user = get_user_by_id(user)
+    tasks = user['tasks']
+    tasks.remove(int(unique_id))
+    user_points = user['points'] + get_task_by_unique_id(unique_id)['points']
+    if not tasks:
+        tasks = []
+    user_collection.find_one_and_update({'_id':user['_id']}, {'$set':{'tasks':tasks, 'points':int(user_points)}})
+    return 'Task marked as complete'

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fuck</title>
     <link rel="stylesheet" href="../static/css/parent.css">
-    <link rel="stylesheet" href="../static/css/rewards.css">
+    <link rel="stylesheet" href="../static/css/tasks.css">
     <link rel="stylesheet" href="../static/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab:wght@400;700&display=swap"
         rel="stylesheet">
-</head>
+</head> 
 
 <body>
     <div class="main">
@@ -22,14 +23,14 @@
             <div class="logo">Logo</div>
             <div class="nav">
                 <ul>
-                    <li><a href="/dashboard"><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
+                    <li><a href="/dashboard" ><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
                                 class="text">Dashboard</span></a></li>
                     <li><a href="/tasks"><span class="icon"><i class="fas fa-signal"></i></span><span
                                 class="text">Tasks</span></a></li>
-                    <li><a href="" class="active"><span class="icon"><i class="fas fa-coins"></i></span><span
+                    <li><a href="/rewards"><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
-                    <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
-                        class="text">Feedback</span></a></li> 
+                    <li><a href="" class="active"><span class="icon"><i class="fas fa-comment"></i></span><span
+                        class="text">Feedback</span></a></li>             
                         {% if admin %}
                         <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
                                     class="text">Workers</span></a></li>
@@ -56,35 +57,57 @@
                 </div>
                 <div class="right">
                     <div class="pfp">
-                        <img src="../static/images/user.png" alt="">
+                        <img src="../static/images/user.png" draggable="false" alt="">
                     </div>
                     <div class="name">{{ name }}</div>
                 </div>
             </header>
+
             <main>
-                
-                <div class="title">Rewards</div>
-                <div class="reward-container">
-                    {% for reward in rewards %}
-                    <div class="reward">
-                        <div class="inner">
-                            <div class="img-container">
-                                <i class="fas fa-{{ reward['icon'] }}"></i>
-                            </div>
-                            <div class="name">{{ reward['name'] }}</div>
-                            <div class="desc">{{ reward['description'] }}</div>
-                            <a style="color: aliceblue;" href="/rewards/{{ reward['redirect'] }}"><div class="btn">Reedem @ {{ reward['points'] }}pts.</div></a>
-                        </div>
+                <div class="head">
+                    <div class="title">Anonymous Feedback</div>
+                </div>
+                {% for feed in unread_feedback %}
+                <div class="task">
+                    <div class="text">
+
+                        <div class="desc">{{ feed['feedback'] }}</div>
                     </div>
-                    {% endfor %}    
+                    <div class="employees">
+                        <form action="/feedback/read/{{ feed['unique_id'] }}" method="post">
+                            <input type="submit" value="Mark as read">
+                          </form>
                     </div>
                 </div>
-        
+                
+                {% endfor %}
+                <br>
+                <div class="head">
+                    <div class="title">Read Feedback</div>
+                </div>
+                {% for feed in read_feedback %}
+                <div class="task">
+                    <div class="text">
+
+                        <div class="desc">{{ feed['feedback'] }}</div>
+                    </div>
+                    <div class="employees">
+                        <form action="/feedback/delete/{{ feed['unique_id'] }}" method="post">
+                            <input type="submit" value="Delete">
+                          </form>
+                    </div>
+                </div>
+                
+                {% endfor %}
+
             </main>
+            
         </div>
 
     </div>
-
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script src="../static/js/dropdown.js"></script>
 
 </html>
