@@ -156,13 +156,37 @@ main{
     z-index: 2;
     position: relative;
 }
+
+main .head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3em;
+    padding: 0 40px;
+}
+
+main .add-task-btn{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--green);
+}
+
+main .add-task-btn i{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+main .add-task-btn:hover i{
+    color: black
+}
 main .title{
     display: inline-block;
     font-family: 'Roboto Slab', serif; 
     font-size: 3em;
     border-bottom: 4px solid var(--green);
-    margin: 20px;
-    margin-bottom: 1em;
 }
 
 .main .task{
@@ -227,12 +251,23 @@ main .title{
     position: absolute;
     top: 0;
     left: 0;
-    width: calc((60/100) * 100%);
+    /* width: calc((10/100) * 100%); */
     height: 20px;
     background: var(--purple);
 }
 
 /* ---------- Media queries ---------- */  
+.icons input{
+    text-transform: uppercase;
+    padding: 5px 10px;
+    font-size: 14px;
+    background: transparent;
+    font-family: 'poppins';
+    font-size: 1.2em;
+    border: none;
+    color: grey;
+}
+
 .employees{
     background: #fff;
     border-radius: 5px;
@@ -240,15 +275,14 @@ main .title{
     padding: 0 10px;
     box-shadow: 0 8px 6px -10px #b3c6ff;
   }
-  
 .employees form{
     display: flex;
     width: 200px;
     color: grey;
     cursor: pointer;
 }
-  
-.employees form #cars{
+
+.employees form #users{
     text-transform: uppercase;
     padding: 13px 15px;
     font-size: 14px;
@@ -261,7 +295,7 @@ main .title{
     color: grey;
 }
 
-.employees form #cars option{
+.employees form #users option{
     font-family: 'poppins';
     font-weight: lighter;
     width: 100%;
@@ -276,8 +310,8 @@ main .title{
     border: none;
     color: grey;
 }
-  
-.employees #cars option:hover{
+
+.employees #users option:hover{
     color: var(--purple);
 }
 

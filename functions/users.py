@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import bcrypt
 import urllib
 
-host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
 client = MongoClient(host)
 database = client['hackathon']
 user_collection = database['users']
@@ -15,14 +15,15 @@ def register(name, email, password):
         'name': name,
         'role':'worker',
         'level':0,
-        'points':0
+        'points':0,
+        'tasks':[]
     }
     if '@' in email:
         try:
             user_collection.insert_one(data)
-            return 'Registration Successful!'
+            return True
         except:
-            return 'an error occured'
+            return False
 
 def check_for_user(email, password):
     user = user_collection.find_one({'_id': email.lower()})
@@ -38,3 +39,9 @@ def check_admin(user):
         return True
     else:
         return False
+
+def get_user_by_name(name):
+    return user_collection.find_one({'name':name})
+
+def get_user_by_id(email):
+    return user_collection.find_one({'_id':email})

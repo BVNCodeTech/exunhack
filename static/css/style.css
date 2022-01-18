@@ -2,7 +2,7 @@ body{
     height: 100vh;
     background-color: #121212;
     color: white;
-    background-image: url('../images/bg.jpg');
+    background-image: url('../images/bg.png');
 }
 
 header{
@@ -80,6 +80,7 @@ nav .navbar li a:hover::before{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #121212;
 }
 
 .content .text .title{
