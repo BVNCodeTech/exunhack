@@ -19,9 +19,7 @@ def remove_task(id):
     for user_name in users:
         user = get_user_by_name(user_name)
         tasks = user['tasks']
-        print(tasks)
         tasks.remove(int(id))
-        print(tasks, type(tasks)) 
         if not tasks:
             tasks = []
         user_collection.find_one_and_update({'_id':user['_id']}, {'$set':{'tasks':tasks}})
