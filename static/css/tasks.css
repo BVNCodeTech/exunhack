@@ -241,65 +241,47 @@ main .title{
     box-shadow: 0 8px 6px -10px #b3c6ff;
   }
   
-.employees .dropdown{
+.employees form{
+    display: flex;
     width: 200px;
     color: grey;
-    position: relative;
     cursor: pointer;
 }
   
-.employees .dropdown .default{
+.employees form #cars{
     text-transform: uppercase;
     padding: 13px 15px;
     font-size: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    outline: none;
+    border: none;
+    background: white;
+    color: grey;
 }
 
-.employees .dropdown .default .icons{
-    display: flex;
-    align-items: center;
+.employees form #cars option{
+    font-family: 'poppins';
+    font-weight: lighter;
+    width: 100%;
+    background: white;
+    padding: 20px 10px;
 }
-.employees .dropdown .default .fa-caret-down{
-    font-size: 2em;
+.employees form input{
+    text-transform: uppercase;
+    padding: 5px 10px;
+    background: transparent;
+    font-family: 'poppins';
+    border: none;
+    color: grey;
+}
+  
+.employees #cars option:hover{
     color: var(--purple);
-    border-right: 1px solid grey;
-    padding: 0 10px;
 }
 
-.employees .dropdown .default .fa-check{
-    font-size: 1.5em;
-    color: var(--purple);
-    padding: 0 10px;
-
-}
-.employees .dropdown ul{
-    position: absolute;
-    top: 70px;
-    left: -10px;
-    background: #fff;
-    width: 150px;
-    border-radius: 5px;
-    padding: 20px;
-    display: none;
-    z-index: 3;
-    box-shadow: 8px 8px 6px -10px #b3c6ff;
-}
-  
-.employees .dropdown ul.active{
-    display: block;
-}
-  
-.employees .dropdown ul li{
-    padding-bottom: 20px;
-}
-  
-.employees .dropdown ul li:last-child{
-    padding-bottom: 0;
-}
-  
-.employees .dropdown ul li:hover{
+.employees input:hover{
     color: var(--purple);
 }
 
