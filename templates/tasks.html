@@ -1,127 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fuck</title>
-    <link rel="stylesheet" href="../static/css/parent.css">
-    <link rel="stylesheet" href="../static/css/tasks.css">
-    <link rel="stylesheet" href="../static/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab:wght@400;700&display=swap"
-        rel="stylesheet">
-</head>
-
-<body>
-    <div class="main">
-        <input type="checkbox" name="" id="nav-toggle">
-        <div class="sidebar">
-            <div class="logo">Logo</div>
-            <div class="nav">
-                <ul>
-                    <li><a href="/dashboard"><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
-                                class="text">Dashboard</span></a></li>
-                    <li><a href="" class="active"><span class="icon"><i class="fas fa-signal"></i></span><span
-                                class="text">Tasks</span></a></li>
-                    <li><a href="/rewards"><span class="icon"><i class="fas fa-coins"></i></span><span
-                                class="text">Rewards</span></a></li>
-                    <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
-                                class="text">Workers</span></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="social-icons">
-            <ul>
-                <li><a href=""><i class="fab fa-facebook"></i></a></li>
-                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                <li><a href=""><i class="fas fa-newspaper"></i></a></li>
-            </ul>
-        </div>
-
-        <div class="main-content">
-            <div class="overlay"></div>
-            <header>
-                <div class="left">
-                    <label for="nav-toggle">
-                        <i class="fas fa-bars"></i>
-                    </label>
-                </div>
-                <div class="right">
-                    <div class="pfp">
-                        <img src="../static/images/user.png" alt="">
-                    </div>
-                    <div class="name">{{ name }}</div>
-                </div>
-            </header>
-
-            <main>
-                <div class="head">
-                    <div class="title">Tasks</div>
-                    <div class="add-task-btn">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                </div>
-                {% for task in tasks %}
-                <div class="task">
-                    {% if admin %}
-                    <form action="/tasks/remove/{{ task['unique_id'] }}" method="post">
-                        <input type="submit" value="Remove">
-                      </form>
-                    {% endif %}
-                    <div class="text">
-                        <div class="head">
-                            <div class="name">{{ task['name'] }}</div>
-                            <div class="points">{{ task['points'] }}</div>
-                        </div>
-                        <div class="desc">{{ task['description'] }}</div>
-                    </div>
-                    <div class="employees">
-                        {% if admin %}
-                        <form action="/tasks/assign/{{ task['unique_id'] }}" method="post">
-                            <select id="users" name="users">
-                                <option value="">Assign</option>
-                            {% for user in task['unassigned_users'] %}
-                              <option value="{{ user }}">{{ user }}</option>
-                             {% endfor %}
-                            </select>
-                            <input type="submit">
-                          </form>
-                          
-                        {% endif %}
-                        {% if not admin %}
-                        <form action="/tasks/complete/{{ task['unique_id'] }}" method="post">
-                            <!-- <select id="users" name="users">
-                                <option value="">Assign</option>
-                            {% for user in task['unassigned_users'] %}
-                              <option value="{{ user }}">{{ user }}</option>
-                             {% endfor %}
-                            </select> 
-                            <input type="submit" value="Mark as Complete">
-                          </form>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="progress-indicator">
-                    <div class="progress-bar"></div>
-                    <div class="number">60%</div>
-                </div>
-                
-                {% endfor %}
-            </main>
-            
-        </div>
-
-    </div>
-</body>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>
-<script src="../static/js/dropdown.js"></script>
-
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -129,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fuck</title>
+    <title>Tasks | Willy Wonka's</title>
     <link rel="stylesheet" href="../static/css/parent.css">
     <link rel="stylesheet" href="../static/css/tasks.css">
     <link rel="stylesheet" href="../static/css/all.min.css">
@@ -148,7 +25,7 @@
     <div class="main">
         <input type="checkbox" name="" id="nav-toggle">
         <div class="sidebar">
-            <div class="logo">Logo</div>
+            <div class="logo">Willy Wonka's</div>
             <div class="nav">
                 <ul>
                     <li><a href="/dashboard"><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
@@ -159,22 +36,41 @@
                                 class="text">Rewards</span></a></li>
                     <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
                                 class="text">Feedback</span></a></li>
+                                <li><a href="/training"><span class="icon"><i class="fas fa-school"></i></span><span
+                                    class="text">Training</span></a></li>
                     {% if admin %}
                     <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
                                 class="text">Workers</span></a></li>
                     {% endif %}
+                    <li><a href="/logout"><span class="icon"><i class="fas fa-sign-out-alt"></i></span><span
+                        class="text">Logout</span></a></li>
                 </ul>
             </div>
         </div>
         <div class="social-icons">
             <ul>
-                <li><a href=""><i class="fab fa-facebook"></i></a></li>
-                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                <li><a href=""><i class="fas fa-newspaper"></i></a></li>
+                <li><a href="https://facebook.com/codetechbvn" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="https://instagram.com/codetech.bvn" target='_blank'><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://github.com/bvncodetech" target='_blank'><i class="fab fa-github"></i></a></li>
+                <li><a href="https://teamcodetech.in" target="_blank"><i class="fas fa-globe"></i></a></li>
             </ul>
         </div>
-
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert" id="alert">
+                <div></div>
+                <div>{{ message }}</div>
+                <div></div>
+            </div>
+            <script>
+                var flash = document.getElementById("alert");
+                setTimeout(function(){ flash.style.opacity = "0"; }, 3000);
+                setTimeout(function(){ flash.remove(); }, 3600);
+            </script>
+            {% endfor %}
+          {% endif %}
+          {% endwith %}
         <div class="main-content">
             <div class="overlay"></div>
             <header>

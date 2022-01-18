@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login | Willy Wonka's</title>
     <link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
@@ -26,14 +26,22 @@
         </form>
     </div>
 
-    <!-- {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-    {% for message in messages %}
-    {{message}}
-    {% endfor %}
-    {% endif %}
-    {% endwith %} 
- -->
+      {% for category, message in messages %}
+        <div class="alert" id="alert">
+            <div></div>
+            <div>{{ message }}</div>
+            <div></div>
+        </div>
+        <script>
+            var flash = document.getElementById("alert");
+            setTimeout(function(){ flash.style.opacity = "0"; }, 3000);
+            setTimeout(function(){ flash.remove(); }, 3600);
+        </script>
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
 
 </body>
 </html>

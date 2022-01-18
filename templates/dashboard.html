@@ -5,21 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fuck</title>
+    <title>Dashboard | Willy Wonka's</title>
     <link rel="stylesheet" href="../static/css/parent.css">
     <link rel="stylesheet" href="../static/css/dashboards.css">
     <link rel="stylesheet" href="../static/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="main">
         <input type="checkbox" name="" id="nav-toggle">
         <div class="sidebar">
-            <div class="logo">Logo</div>
+            <div class="logo">Willy Wonka's</div>
             <div class="nav">
                 <ul>
                     <li><a href="" class="active"><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
@@ -30,26 +29,41 @@
                                 class="text">Rewards</span></a></li>
                     <li><a href="/feedback"><span class="icon"><i class="fas fa-comment"></i></span><span
                                 class="text">Feedback</span></a></li>
+                    <li><a href="/training"><span class="icon"><i class="fas fa-school"></i></span><span
+                        class="text">Training</span></a></li>
                     {% if admin %}
                     <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
                                 class="text">Workers</span></a></li>
                     {% endif %}
+                    <li><a href="/logout"><span class="icon"><i class="fas fa-sign-out-alt"></i></span><span
+                        class="text">Logout</span></a></li>
                 </ul>
             </div>
         </div>
         <div class="social-icons">
             <ul>
-                <li><a href=""><i class="fab fa-facebook"></i></a></li>
-                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                <li><a href=""><i class="fas fa-newspaper"></i></a></li>
+                <li><a href="https://facebook.com/codetechbvn" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="https://instagram.com/codetech.bvn" target='_blank'><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://github.com/bvncodetech" target='_blank'><i class="fab fa-github"></i></a></li>
+                <li><a href="https://teamcodetech.in" target="_blank"><i class="fas fa-globe"></i></a></li>
             </ul>
         </div>
-        <div class="alert" id="alert-{{ category }}">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert" id="alert">
             <div></div>
-            <div>Notification</div>
+            <div>{{ message }}</div>
             <div></div>
         </div>
+        <script>
+            var flash = document.getElementById("alert");
+            setTimeout(function(){ flash.style.opacity = "0"; }, 3000);
+            setTimeout(function(){ flash.remove(); }, 3600);
+        </script>
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
         <div class="main-content">
             <div class="overlay"></div>
             <header>
@@ -68,19 +82,18 @@
             <main>
                 <div class="welcome">
                     <div class="title">Welcome {{ name }}</div>
-                    <div class="desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio numquam neque
-                        saepe doloribus odit vel, ipsum ?</div>
+                    <div class="desc"></div>
                 </div>
                 <div class="level">
                     <div class="left">
-                        <div class="title">Level 1</div>
-                        <div class="level-points">980/1000</div>
+                        <div class="title">Level {{ level }}</div>
+                        <div class="level-points">Points: {{ points }}</div>
                     </div>
                     <div class="right">
 
                         <div class="outer">
                             <div class="inner">
-                                <div class="number">80%</div>
+                                <div class="number">{{ level }}</div>
                             </div>
                         </div>
 
@@ -96,15 +109,11 @@
                     </div>
                 </div>
                 <div class="cards">
+                    {% for task in tasks %}
                     <div class="card">
-                        <div class="title">Something <br>here</div>
+                        <div class="title">{{ task['name'] }}</div>
                     </div>
-                    <div class="card">
-                        <div class="title">Something <br>here</div>
-                    </div>
-                    <div class="card">
-                        <div class="title">Something <br>here</div>
-                    </div>
+                    {% endfor %}
                 </div>
             </main>
         </div>

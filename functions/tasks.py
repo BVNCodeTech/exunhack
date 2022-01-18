@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import urllib
 import random
 from functions.users import get_user_by_id, get_user_by_name
+from math import ceil
 
 host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
 client = MongoClient(host, tls=True, tlsAllowInvalidCertificates=True)
@@ -23,7 +24,7 @@ def remove_task(id):
         if not tasks:
             tasks = []
         user_collection.find_one_and_update({'_id':user['_id']}, {'$set':{'tasks':tasks}})
-        task_collection.delete_one({'unique_id':int(id)})
+    task_collection.delete_one({'unique_id':int(id)})
     return 'Task removed'
 
 def edit_task(id, name, description, deadline, points):
@@ -89,7 +90,8 @@ def mark_task_as_complete(user, unique_id):
     tasks = user['tasks']
     tasks.remove(int(unique_id))
     user_points = user['points'] + get_task_by_unique_id(unique_id)['points']
+    level = int(ceil(user_points/100))
     if not tasks:
         tasks = []
-    user_collection.find_one_and_update({'_id':user['_id']}, {'$set':{'tasks':tasks, 'points':int(user_points)}})
+    user_collection.find_one_and_update({'_id':user['_id']}, {'$set':{'tasks':tasks, 'points':int(user_points), 'level':level}})
     return 'Task marked as complete'

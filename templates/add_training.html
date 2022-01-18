@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Add Training | Willy Wonka's</title>
     <link rel="stylesheet" href="../static/css/parent.css">
     <link rel="stylesheet" href="../static/css/add_task.css">
     <link rel="stylesheet" href="../static/css/all.min.css">
@@ -19,12 +19,12 @@
     <div class="main">
         <input type="checkbox" name="" id="nav-toggle">
         <div class="sidebar">
-            <div class="logo">Logo</div>
+            <div class="logo">Willy Wonka's</div>
             <div class="nav">
                 <ul>
                     <li><a href="/dashboard" ><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
                                 class="text">Dashboard</span></a></li>
-                    <li><a href="/tasks" class="active"><span class="icon"><i class="fas fa-signal"></i></span><span
+                    <li><a href="/tasks"><span class="icon"><i class="fas fa-signal"></i></span><span
                                 class="text">Tasks</span></a></li>
                     <li><a href="/rewards"><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
@@ -36,18 +36,35 @@
                         <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
                                     class="text">Workers</span></a></li>
                         {% endif %}
+                        <li><a href="/logout"><span class="icon"><i class="fas fa-sign-out-alt"></i></span><span
+                            class="text">Logout</span></a></li>
                 </ul>
             </div>
         </div>
         <div class="social-icons">
             <ul>
-                <li><a href=""><i class="fab fa-facebook"></i></a></li>
-                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                <li><a href=""><i class="fas fa-newspaper"></i></a></li>
+                <li><a href="https://facebook.com/codetechbvn" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="https://instagram.com/codetech.bvn" target='_blank'><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://github.com/bvncodetech" target='_blank'><i class="fab fa-github"></i></a></li>
+                <li><a href="https://teamcodetech.in" target="_blank"><i class="fas fa-globe"></i></a></li>
             </ul>
         </div>
-
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert" id="alert">
+                <div></div>
+                <div>{{ message }}</div>
+                <div></div>
+            </div>
+            <script>
+                var flash = document.getElementById("alert");
+                setTimeout(function(){ flash.style.opacity = "0"; }, 3000);
+                setTimeout(function(){ flash.remove(); }, 3600);
+            </script>
+            {% endfor %}
+          {% endif %}
+          {% endwith %}
         <div class="main-content">
             <div class="overlay"></div>
             <header>

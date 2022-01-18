@@ -22,7 +22,7 @@ def home():
     except KeyError:
         session['login'] = False
         login = session['login']
-    return render_template('index.html', login=login)
+    return redirect('/dashboard')
 
 
 @app.route('/login')
@@ -96,14 +96,18 @@ def registerUser():
 @app.route('/dashboard')
 def dashboard():
     if session['login'] and session['user']:
-        return render_template('dashboard.html', name=get_user_by_id(session['user'])['name'], admin=check_admin(session['user']))
+        three_tasks = get_user_tasks(session['user'])[:3]
+        user = get_user_by_id(session['user'])
+        points = user['points']
+        level = user['level']
+        return render_template('dashboard.html', name=get_user_by_id(session['user'])['name'], admin=check_admin(session['user']), tasks=three_tasks, points=points, level=level)
     else:
         return redirect('/login')
 
 
 @app.route('/tasks')
 def all_tasks():
-    # try:
+    try:
         if session['login'] and session['user']:
             if check_admin(session['user']):
                 tasks = []
@@ -117,8 +121,8 @@ def all_tasks():
 
         else:
             return redirect('/login')
-    # except KeyError:
-    #     return redirect('/login')
+    except KeyError:
+        return redirect('/login')
 
 
 @app.route('/tasks/<id>')
@@ -259,7 +263,7 @@ def redeem_reward(reward):
 def feedback():
     if session['login'] and session['user']:
         if check_admin(session['user']):
-            return render_template('feedback_admin.html', read_feedback=get_read_feedback(), unread_feedback=get_unread_feedback(), name=get_user_by_id(session['user'])['name'])
+            return render_template('feedback_admin.html', read_feedback=get_read_feedback(), unread_feedback=get_unread_feedback(), name=get_user_by_id(session['user'])['name'], admin=check_admin(session['user']))
         else:
             return render_template('feedback.html', name=get_user_by_id(session['user'])['name'], admin=check_admin(session['user']))
     else:
@@ -307,7 +311,7 @@ def feedback_delete(id):
 @app.route('/training')
 def training_loompas():
     if session['login'] and session['user']:
-        return render_template('train.html', name=session['user'],training=get_all_training(), admin=check_admin(session['user']))
+        return render_template('train.html', name=get_user_by_id(session['user'])['name'], training=get_all_training(), admin=check_admin(session['user']))
     else:
         return redirect('/login')
 
@@ -315,7 +319,7 @@ def training_loompas():
 def training_add():
     if session['login'] and session['user']:
         if check_admin(session['user']):
-            return render_template('add_training.html', admin=check_admin(session['user']))
+            return render_template('add_training.html', admin=check_admin(session['user']),  name=get_user_by_id(session['user'])['name'])
         else:
             return render_template('unauthorized.html')
     else:

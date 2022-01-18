@@ -36,3 +36,17 @@ a{text-decoration: none;}
     color: white;
     transition: all 500ms ease;
 }
+
+.alert{
+    position: absolute;
+    bottom: 3%;
+    left: 0;
+    width: 20vw;
+    background-color: var(--green);
+    z-index: 10;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 1.5em;
+    color: white;
+}

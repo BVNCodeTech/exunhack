@@ -227,3 +227,17 @@ main .reward-container .reward  .btn:hover{
     .sidebar{width: 50vw;}
     .main-content{margin-left: 50%;}
 }
+
+.alert{
+    position: absolute;
+    bottom: 3%;
+    left: 0;
+    width: 20vw;
+    background-color: var(--green);
+    z-index: 10;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 1.5em;
+    color: white;
+}

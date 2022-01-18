@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 import urllib
+from math import ceil
 
 host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 client = MongoClient(host)
@@ -18,8 +19,9 @@ def claim_reward(user, reward):
     user_points = user['points']
     reward = rewards_collection.find_one({'redirect':reward})
     reward_points = reward['points']
-    user_points -= reward_points
-    if user_points < 0:
+    new_points = user_points - reward_points
+    level = int(ceil(new_points/100))
+    if 0 > new_points:
         return f"Insufficient points for {reward['name']}"
-    user_collection.update_one({'_id':user},{'$set':{'points':user_points}})
+    user_collection.update_one(user,{'$set':{'points':int(new_points), 'level':level}})
     return f"Claimed {reward['name']}"
