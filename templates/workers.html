@@ -24,11 +24,11 @@
                 <ul>
                     <li><a href="/dashboard"><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
                                 class="text">Dashboard</span></a></li>
-                    <li><a href="" class="active"><span class="icon"><i class="fas fa-signal"></i></span><span
+                    <li><a href="/tasks"><span class="icon"><i class="fas fa-signal"></i></span><span
                                 class="text">Tasks</span></a></li>
                     <li><a href=""><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
-                    <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
+                    <li><a href="" class="active"><span class="icon"><i class="fas fa-info"></i></span><span
                                 class="text">Workers</span></a></li>
                 </ul>
             </div>
@@ -60,49 +60,16 @@
 
             <main>
                 
-                <div class="title">Tasks</div>
-                {% for task in tasks %}
+                <div class="title">Oompa Loompas</div>
+                {% for user in users %}
                 <div class="task">
-                    <form action="/tasks/remove/{{ task['unique_id'] }}" method="post">
-                        <input type="submit" value="Remove">
-                      </form>
                     <div class="text">
                         <div class="head">
-                            <div class="name">{{ task['name'] }}</div>
-                            <div class="points">{{ task['points'] }}</div>
+                            <div class="name">{{ user['name'] }}</div>
                         </div>
-                        <div class="desc">{{ task['description'] }}</div>
+                        <div class="desc">{{ user['_id'] }}</div>
                     </div>
-                    <div class="employees">
-                        {% if admin %}
-                        <form action="/tasks/assign/{{ task['unique_id'] }}" method="post">
-                            <select id="users" name="users">
-                                <option value="">Assign</option>
-                            {% for user in task['unassigned_users'] %}
-                              <option value="{{ user }}">{{ user }}</option>
-                             {% endfor %}
-                            </select>
-                            <input type="submit">
-                          </form>
-                          
-                        {% endif %}
-                        {% if not admin %}
-                        <form action="/tasks/complete/{{ task['unique_id'] }}" method="post">
-                            <!-- <select id="users" name="users">
-                                <option value="">Assign</option>
-                            {% for user in task['unassigned_users'] %}
-                              <option value="{{ user }}">{{ user }}</option>
-                             {% endfor %}
-                            </select> -->
-                            <input type="submit" value="Mark as Complete">
-                          </form>
-                        {% endif %}
                     </div>
-                </div>
-                <div class="progress-indicator">
-                    <div class="progress-bar"></div>
-                    <div class="number">60%</div>
-                </div>
                 {% endfor %}
             </main>
 

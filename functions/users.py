@@ -45,3 +45,9 @@ def get_user_by_name(name):
 
 def get_user_by_id(email):
     return user_collection.find_one({'_id':email})
+
+def get_all_users():
+    users = []
+    for user in user_collection.find():
+        users.append(user)
+    return users

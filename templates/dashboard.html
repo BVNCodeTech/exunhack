@@ -24,11 +24,11 @@
                 <ul>
                     <li><a href="" class="active"><span class="icon"><i class="fas fa-hourglass-half"></i></span><span
                                 class="text">Dashboard</span></a></li>
-                    <li><a href=""><span class="icon"><i class="fas fa-signal"></i></span><span
+                    <li><a href="/tasks" ><span class="icon"><i class="fas fa-signal"></i></span><span
                                 class="text">Tasks</span></a></li>
                     <li><a href=""><span class="icon"><i class="fas fa-coins"></i></span><span
                                 class="text">Rewards</span></a></li>
-                    <li><a href=""><span class="icon"><i class="fas fa-info"></i></span><span
+                    <li><a href="/workers"><span class="icon"><i class="fas fa-info"></i></span><span
                                 class="text">Workers</span></a></li>
                 </ul>
             </div>
@@ -54,12 +54,12 @@
                     <div class="pfp">
                         <img src="../static/images/user.png" alt="">
                     </div>
-                    <div class="name">John Doe</div>
+                    <div class="name">{{ name }}</div>
                 </div>
             </header>
             <main>
                 <div class="welcome">
-                    <div class="title">Welcome John Doe!</div>
+                    <div class="title">Welcome {{ name }}</div>
                     <div class="desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio numquam neque
                         saepe doloribus odit vel, ipsum ?</div>
                 </div>

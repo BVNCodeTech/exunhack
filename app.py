@@ -89,6 +89,14 @@ def registerUser():
     else:
         return redirect('/add-user')
 
+    
+@app.route('/dashboard')
+def dashboard():
+    if session['login'] and session['user']:
+        return render_template('dashboard.html', name=get_user_by_id(session['user'])['name'])
+    else:
+        return redirect('/login')
+
 
 @app.route('/tasks')
 def all_tasks():
@@ -153,8 +161,7 @@ def new_task_submit():
 def del_task(id):
     if session['login'] and session['user']:
         if check_admin(session['user']):
-            object_id = get_all_tasks()[int(id)]['_id']
-            flash(remove_task(object_id))
+            flash(remove_task(id))
             return redirect('/tasks')
         else:
             return 'Unauthorized'
@@ -204,6 +211,17 @@ def assign_task(id):
             return redirect('/tasks')
         else:
             return redirect('/tasks')
+    else:
+        return redirect('/login')
+
+
+@app.route('/workers')
+def all_oompa_loompas():
+    if session['login'] and session['user']:
+        if check_admin(session['user']):
+            return render_template('workers.html', users=get_all_users(), name=get_user_by_id(session['user'])['name'])
+        else:
+            return 'Unauthorized'
     else:
         return redirect('/login')
 

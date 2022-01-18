@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import urllib
 import random
+from functions.users import get_user_by_id, get_user_by_name
 
 host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 client = MongoClient(host)
@@ -14,7 +15,17 @@ def add_task(name, description, deadline, points):
     return 'New task added'
 
 def remove_task(id):
-    task_collection.delete_one({'_id':id})
+    users = get_users_with_this_task(id)
+    for user_name in users:
+        user = get_user_by_name(user_name)
+        tasks = user['tasks']
+        print(tasks)
+        tasks.remove(int(id))
+        print(tasks, type(tasks)) 
+        if not tasks:
+            tasks = []
+        user_collection.find_one_and_update({'_id':user['_id']}, {'$set':{'tasks':tasks}})
+        task_collection.delete_one({'unique_id':int(id)})
     return 'Task removed'
 
 def edit_task(id, name, description, deadline, points):
