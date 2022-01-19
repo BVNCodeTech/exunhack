@@ -340,6 +340,17 @@ def training_add_submit():
     else:
         return redirect('/login')
 
+@app.errorhandler(404)
+def error(error):
+    return render_template('404.html')
+
+
+@app.errorhandler(500)
+def error(error):
+    session['user'] = None
+    session['login'] = False
+    return redirect('/login')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
