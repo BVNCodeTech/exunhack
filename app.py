@@ -9,7 +9,7 @@ from functions.feedback import *
 from functions.training import *
 
 app = Flask(__name__)
-app.secret_key = 'HELIKOPTER HELIKOPTER'
+app.secret_key = 'bablucopter'
 
 
 @app.route('/')
@@ -95,15 +95,17 @@ def registerUser():
     
 @app.route('/dashboard')
 def dashboard():
-    if session['login'] and session['user']:
-        three_tasks = get_user_tasks(session['user'])[:3]
-        user = get_user_by_id(session['user'])
-        points = user['points']
-        level = user['level']
-        return render_template('dashboard.html', name=get_user_by_id(session['user'])['name'], admin=check_admin(session['user']), tasks=three_tasks, points=points, level=level)
-    else:
+    try:
+        if session['login'] and session['user']:
+            three_tasks = get_user_tasks(session['user'])[:3]
+            user = get_user_by_id(session['user'])
+            points = user['points']
+            level = user['level']
+            return render_template('dashboard.html', name=get_user_by_id(session['user'])['name'], admin=check_admin(session['user']), tasks=three_tasks, points=points, level=level)
+        else:
+            return redirect('/login')
+    except KeyError:
         return redirect('/login')
-
 
 @app.route('/tasks')
 def all_tasks():
