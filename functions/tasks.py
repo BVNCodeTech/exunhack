@@ -4,7 +4,7 @@ import random
 from functions.users import get_user_by_id, get_user_by_name
 from math import ceil
 
-host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
+host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 client = MongoClient(host, tls=True, tlsAllowInvalidCertificates=True)
 database = client['hackathon']
 user_collection = database['users']

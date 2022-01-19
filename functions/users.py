@@ -4,7 +4,7 @@ import bcrypt
 import urllib
 import ssl
 
-host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE'
+host = 'mongodb+srv://pancham:pancham@exun.lqdp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 client = MongoClient(host, tls=True, tlsAllowInvalidCertificates=True)
 database = client['hackathon']
 user_collection = database['users']
